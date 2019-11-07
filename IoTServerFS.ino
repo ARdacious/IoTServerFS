@@ -68,6 +68,8 @@ ESP8266HTTPUpdateServer httpUpdater;
 
 #include "HttpMethods.h"
 
+#define LED 2
+
 void setup(void) {
   DBG_OUTPUT_PORT.begin(115200);
   DBG_OUTPUT_PORT.print("\n");
@@ -75,11 +77,13 @@ void setup(void) {
   DBG_OUTPUT_PORT.setDebugOutput(true);
 
   oled();
+
+  // Init IO to turn off fans during WifiSetup
+  setup_WaterCooler_IO();
   
   SPIFFS.begin();
 
   listFiles();
-
 
   //WIFI INIT
   DBG_OUTPUT_PORT.printf("Connecting to %s\n", ssid);
@@ -88,9 +92,12 @@ void setup(void) {
     WiFi.begin(ssid, password);
   }
 
+  digitalWrite(LED, HIGH); // turn on
   while (WiFi.status() != WL_CONNECTED) {
+    digitalWrite(LED, LOW); // turn off
     delay(500);
     DBG_OUTPUT_PORT.print(".");
+    digitalWrite(LED, HIGH); // turn on
   }
   DBG_OUTPUT_PORT.println("");
   DBG_OUTPUT_PORT.print("Connected! IP address: ");

@@ -5,6 +5,8 @@ void setupPWM();
 
 void updatePWM();
 
+void setup_WaterCooler_IO();
+
 void setup_WaterCooler();
 
 void loop_WaterCooler();

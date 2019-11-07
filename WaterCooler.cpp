@@ -206,6 +206,14 @@ void updateProgress(size_t i, size_t j) {
   blinkLed();
 }
 
+void setup_WaterCooler_IO() {
+  // pwm freq
+  analogWriteFreq(50);
+  analogWrite(FAN_PWM, 0);
+  analogWrite(PELTIER_FAN_PWM, 0);
+  analogWrite(PUMP_PWM, 0);
+}
+
 void setup_WaterCooler() {
   // initialize web sockets
   webSocket.begin();
@@ -218,11 +226,6 @@ void setup_WaterCooler() {
   blinker.attach_ms_scheduled(500, blinkLed);
   // broadcast status
   tempUpdater.attach_ms_scheduled(2000, broadcastTemp);
-  // pwm freq
-  analogWriteFreq(50);
-  analogWrite(FAN_PWM, 0);
-  analogWrite(PELTIER_FAN_PWM, 0);
-  analogWrite(PUMP_PWM, 0);
   init_cycle();
 }
 
