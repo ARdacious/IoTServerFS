@@ -23,6 +23,9 @@
 
 */
 // Some ESP01 use different flash, below allows enabling writing from SPIFS
+
+// Boards package 2.5.0 was successfull.. now upgraded my toolchain
+
 //#define PUYA_SUPPORT 1
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
