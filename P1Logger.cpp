@@ -32,30 +32,30 @@ unsigned long last;
  * Each template argument below results in a field of the same name.
  */
 using MyData = ParsedData<
-  /* String */ identification,
-  /* String */ p1_version,
-  /* String */ timestamp,
-  /* String */ equipment_id,
+//  /* String */ identification,
+//  /* String */ p1_version,
+//  /* String */ timestamp,
+//  /* String */ equipment_id,
   /* FixedValue */ energy_delivered_tariff1,
   /* FixedValue */ energy_delivered_tariff2,
   /* FixedValue */ energy_returned_tariff1,
   /* FixedValue */ energy_returned_tariff2,
-  /* String */ electricity_tariff,
+//  /* String */ electricity_tariff,
   /* FixedValue */ power_delivered,
   /* FixedValue */ power_returned,
   /* FixedValue */ electricity_threshold,
   /* uint8_t */ electricity_switch_position,
   /* uint32_t */ electricity_failures,
   /* uint32_t */ electricity_long_failures,
-  /* String */ electricity_failure_log,
+//  /* String */ electricity_failure_log,
   /* uint32_t */ electricity_sags_l1,
   /* uint32_t */ electricity_sags_l2,
   /* uint32_t */ electricity_sags_l3,
   /* uint32_t */ electricity_swells_l1,
   /* uint32_t */ electricity_swells_l2,
   /* uint32_t */ electricity_swells_l3,
-  /* String */ message_short,
-  /* String */ message_long,
+//  /* String */ message_short,
+//  /* String */ message_long,
   /* FixedValue */ voltage_l1,
   /* FixedValue */ voltage_l2,
   /* FixedValue */ voltage_l3,
@@ -69,21 +69,21 @@ using MyData = ParsedData<
   /* FixedValue */ power_returned_l2,
   /* FixedValue */ power_returned_l3,
   /* uint16_t */ gas_device_type,
-  /* String */ gas_equipment_id,
+//  /* String */ gas_equipment_id,
   /* uint8_t */ gas_valve_position,
-  /* TimestampedFixedValue */ gas_delivered,
+//  /* TimestampedFixedValue */ gas_delivered,
   /* uint16_t */ thermal_device_type,
-  /* String */ thermal_equipment_id,
+//  /* String */ thermal_equipment_id,
   /* uint8_t */ thermal_valve_position,
-  /* TimestampedFixedValue */ thermal_delivered,
+//  /* TimestampedFixedValue */ thermal_delivered,
   /* uint16_t */ water_device_type,
-  /* String */ water_equipment_id,
+//  /* String */ water_equipment_id,
   /* uint8_t */ water_valve_position,
-  /* TimestampedFixedValue */ water_delivered,
+//  /* TimestampedFixedValue */ water_delivered,
   /* uint16_t */ slave_device_type,
-  /* String */ slave_equipment_id,
-  /* uint8_t */ slave_valve_position,
-  /* TimestampedFixedValue */ slave_delivered
+//  /* String */ slave_equipment_id,
+  /* uint8_t */ slave_valve_position
+//  /* TimestampedFixedValue */ slave_delivered
 >;
 
 /**
@@ -118,23 +118,33 @@ struct Printer {
   }
 };
 
+WebSocketsServer webSocket(81);
+
+void broadcast(const char *msg) {
+  webSocket.broadcastTXT(msg);
+}
+void broadcast(String &msg) {
+  webSocket.broadcastTXT(msg);
+}
+
+String report;
+
 struct JsonifyReport {
   template<typename Item>
   void apply(Item &i) {
     if (i.present()) {
       Serial.print(Item::name);
-      this->report += "\"";
-      this->report += Item::name;
-      this->report += "\":" + String(i.val()) + ", ";
+      //broadcast(String(Item::name).c_str());
+      //broadcast(String(i.val()).c_str());
+      report += "\"";
+      report += Item::name;
+      report += "\":" + String(i.val()) + ", ";
       //Serial.print(Item::unit());
       //Serial.println();
     }
   }
-  String report;
 };
 
-
-WebSocketsServer webSocket(81);
 
 int errorCount = 0;
 
@@ -144,13 +154,6 @@ unsigned long t=0;
 
 char pendingCmd = 0;
 
-
-void broadcast(const char *msg) {
-  webSocket.broadcastTXT(msg);
-}
-void broadcast(String &msg) {
-  webSocket.broadcastTXT(msg);
-}
 
 
 void handleCommand(char ch) {
@@ -208,19 +211,24 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t lenght
 void broadcastData() {
   MyData data;
   String err;
+  reader.enable(true);
+  delay(10);
+
   if (reader.available()) {
     if (reader.parse(&data, &err)) {
       // Parse succesful, print result
       data.applyEach(Printer());
       String json;  
-      json = "{";
+      report = "{";
       JsonifyReport r = JsonifyReport();
-      r.report = json;
       data.applyEach(r);
-      json.remove(json.length()-1,1);
-      json += "}";
-      webSocket.broadcastTXT(json);
+      report.remove(report.length()-2,1);
+      report += "}";
+      webSocket.broadcastTXT(report);
     }
+  }
+  else {
+    webSocket.broadcastTXT("No data available");
   }
 }
 
@@ -232,7 +240,9 @@ void setup_P1Logger_IO() {
   // switch off DMSR
   pinMode(DSMR_ENABLE , OUTPUT);
   digitalWrite(DSMR_ENABLE, LOW);
-}
+  //digitalWrite(DSMR_ENABLE, HIGH);
+  // start a read right away
+  reader.enable(true);}
 
 void setup_P1Logger() {
   // initialize web sockets
@@ -250,6 +260,7 @@ void setup_P1Logger() {
 
 void loop_P1Logger() {
   webSocket.loop();
+  reader.loop();
   if (pendingCmd != 0) {
     handleCommand(pendingCmd);
     pendingCmd = 0;
@@ -258,6 +269,7 @@ void loop_P1Logger() {
     t = ts + 6000;
     if (t < millis()) {
       broadcastData();
+      reportTemperatures();
       //Serial.println(t);
       ts = t;
     }

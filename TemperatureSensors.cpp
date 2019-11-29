@@ -66,9 +66,11 @@ void reportAllJSON() {
   sensors.requestTemperatures();
   for (i = 0; i < c; i++) {
     temp = sensors.getTempCByIndex(i);
-    json += "\"temp" + String(i) + "\":" + String(temp);
+    json += "\"temp" + String(i) + "\":" + String(temp) + ",";
   }
+  json.remove(json.length()-1,1);
   json += "}";  
+  broadcast(json);
 }
 
 

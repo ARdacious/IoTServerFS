@@ -1,97 +1,145 @@
-<!-- 
-  FSWebServer - Example Index Page
-  Copyright (c) 2015 Hristo Gochkov. All rights reserved.
-  This file is part of the ESP8266WebServer library for Arduino environment.
- 
-  This library is free software; you can redistribute it and/or
-  modify it under the terms of the GNU Lesser General Public
-  License as published by the Free Software Foundation; either
-  version 2.1 of the License, or (at your option) any later version.
-  This library is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-  Lesser General Public License for more details.
-  You should have received a copy of the GNU Lesser General Public
-  License along with this library; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
--->
+
 <!DOCTYPE html>
-<html>
 <head>
-  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-  <title>ESP Monitor</title>
-  <script type="text/javascript" src="graphs.js"></script>
-  <script type="text/javascript">
-    var heap,temp,digi;
-    var reloadPeriod = 1000;
-    var running = false;
-    
-    function loadValues(){
-      if(!running) return;
-      var xh = new XMLHttpRequest();
-      xh.onreadystatechange = function(){
-        if (xh.readyState == 4){
-          if(xh.status == 200) {
-            var res = JSON.parse(xh.responseText);
-            heap.add(res.heap);
-            temp.add(res.analog);
-            digi.add(res.gpio);
-            if(running) setTimeout(loadValues, reloadPeriod);
-          } else running = false;
-        }
-      };
-      xh.open("GET", "/all", true);
-      xh.send(null);
-    };
-    
-    function run(){
-      if(!running){
-        running = true;
-        loadValues();
-      }
-    }
-    
-    function onBodyLoad(){
-      var refreshInput = document.getElementById("refresh-rate");
-      refreshInput.value = reloadPeriod;
-      refreshInput.onchange = function(e){
-        var value = parseInt(e.target.value);
-        reloadPeriod = (value > 0)?value:0;
-        e.target.value = reloadPeriod;
-      }
-      var stopButton = document.getElementById("stop-button");
-      stopButton.onclick = function(e){
-        running = false;
-      }
-      var startButton = document.getElementById("start-button");
-      startButton.onclick = function(e){
-        run();
-      }
-      
-      // Example with 10K thermistor
-      //function calcThermistor(v) {
-      //  var t = Math.log(((10230000 / v) - 10000));
-      //  t = (1/(0.001129148+(0.000234125*t)+(0.0000000876741*t*t*t)))-273.15;
-      //  return (t>120)?0:Math.round(t*10)/10;
-      //}
-      //temp = createGraph(document.getElementById("analog"), "Temperature", 100, 128, 10, 40, false, "cyan", calcThermistor);
-      
-      temp = createGraph(document.getElementById("analog"), "Analog Input", 100, 128, 0, 1023, false, "cyan");
-      heap = createGraph(document.getElementById("heap"), "Current Heap", 100, 125, 0, 30000, true, "orange");
-      digi = createDigiGraph(document.getElementById("digital"), "GPIO", 100, 146, [0, 4, 5, 16], "gold");
-      run();
-    }
-  </script>
+<style>
+left {
+  float: left;
+}
+right {
+  float: right;
+}
+
+</style>
 </head>
-<body id="index" style="margin:0; padding:0;" onload="onBodyLoad()">
-  <div id="controls" style="display: block; border: 1px solid rgb(68, 68, 68); padding: 5px; margin: 5px; width: 362px; background-color: rgb(238, 238, 238);">
-    <label>Period (ms):</label>
-    <input type="number" id="refresh-rate"/>
-    <input type="button" id="start-button" value="Start"/>
-    <input type="button" id="stop-button" value="Stop"/>
-  </div>
-  <div id="heap"></div>
-  <div id="analog"></div>
-  <div id="digital"></div>
-</body>
-</html>
+  <meta charset="utf-8" />
+  <title>P1 Web</title>
+  <script src="gauge.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
+  <script language="javascript" type="text/javascript">
+
+  //var wsUri = "ws://192.168.1.15:81/";
+  var wsUri = 'ws://' + location.hostname + ':81/';
+  var output;
+  var stat;
+
+  function init()
+  {
+    output = document.getElementById("output");
+    stat = document.getElementById("status");
+    connectWebSocket();
+  }
+
+  function connectWebSocket()
+  {
+    websocket = new WebSocket(wsUri, ['arduino']);
+    websocket.onopen = function(evt) { onOpen(evt) };
+    websocket.onclose = function(evt) { onClose(evt) };
+    websocket.onmessage = function(evt) { onMessage(evt) };
+    websocket.onerror = function(evt) { onError(evt) };
+  }
+
+  function onOpen(evt)
+  {
+    writeToScreen("CONNECTED");
+    doSend("WebSocket rocks");
+    document.getElementById("gages").style.display = "";
+  }
+
+  function onClose(evt)
+  {
+    writeToScreen("DISCONNECTED");
+    document.getElementById("gages").style.display = "none";
+  }
+
+  function onMessage(evt)
+  {
+    writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
+    try {
+		var data = JSON.parse(evt.data);
+			if (data.hasOwnProperty('power_delivered') ) {
+			var temp = document.gauges.get("power_delivered");
+			temp.value = data['power_delivered'] * 1000;
+			temp.draw();
+		}
+		else {
+			var temp = document.gauges.get("fan-speed");
+			temp.value = data['fan-speed'];
+			temp.draw();
+			var temp = document.gauges.get("pump-speed");
+			temp.value = data['pump-speed'];
+			temp.draw();
+		}
+	}
+	catch (err) {
+		writeToScreen(evt.data);
+		stat.textContent = evt.data;
+	}
+  }
+
+  function onError(evt)
+  {
+    writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+    document.getElementById("gages").style.display = "none";
+  }
+
+  function doSend(message)
+  {
+    writeToScreen("SENT: " + message);
+    websocket.send(message);
+  }
+
+  function dumpvals()
+  {
+	writeToScreen(e.which);
+	var keys = Object.keys(e);
+	writeToScreen(keys);
+	for (let value of Object.keys(e)) {
+		if (typeof e[value] !== 'undefined') {
+			writeToScreen(value + " : jules : " + e[value]);
+		}
+	}
+  }
+  
+  function writeToScreen(message)
+  {
+	var pre = document.createElement("p");
+	pre.style.wordWrap = "break-word";
+	pre.innerHTML = message;
+	output.appendChild(pre);
+  }
+
+  window.addEventListener("load", init, false);
+  
+// listen on events on the document
+$(document).keypress(function(e){
+    var checkWebkitandIE=(e.which==26 ? 1 : 0);
+    var checkMoz=(e.which==122 && e.ctrlKey ? 1 : 0);
+
+    if (checkWebkitandIE || checkMoz) {
+		$("body").append("<p>ctrl+z detected!</p>");
+		websocket.close();
+	}
+	doSend(String.fromCharCode(e.which));
+});
+</script>
+  
+  
+<h2>P1 Logger Web</h2>
+<h3>Status:</h3>
+<div id="gages">
+<div id="1" style="float:left">
+<canvas id="power_delivered" data-width="120" data-height="400" data-type="linear-gauge" data-title="W" data-min-value="0" data-max-value="2000" data-major-ticks="0,500,1000,1500,2000"></canvas>
+<canvas id="temp0" data-title="Temp °C"></canvas>
+<canvas id="supply-temp" data-width="100" data-height="400" data-type="linear-gauge" data-title="Supply flow °C"></canvas>
+<canvas id="return-temp" data-width="100" data-height="400" data-type="linear-gauge" data-title="Return flow °C"></canvas>
+</div>
+</div>
+<br style="clear:both"/>
+<div id="status"></div>
+<h3>Output:</h3>
+<div id="output"></div>
+
+
+</script>
+
+  
