@@ -47,9 +47,7 @@ ADC_MODE(ADC_VCC);
 // Filesystem stuff
 #include <FS.h>
 
-#include "Oled.h"
-
-#include "WaterCooler.h"
+#include "P1Logger.h"
 
 /*
   The blue LED on the ESP-01 module is connected to GPIO1
@@ -61,7 +59,7 @@ ADC_MODE(ADC_VCC);
 
 struct config cfg;
 
-const char* host = "esp8266-iot";
+const char* host = MDNS_HOST_NAME;
 const char* update_path = "/firmware";
 const char* update_username = "admin";
 const char* update_password = "admin";
@@ -76,13 +74,11 @@ ESP8266HTTPUpdateServer httpUpdater;
 void setup(void) {
   DBG_OUTPUT_PORT.begin(115200);
   DBG_OUTPUT_PORT.print("\n");
-  DBG_OUTPUT_PORT.print("IoTServerFS begin\n");
+  DBG_OUTPUT_PORT.print(MDNS_HOST_NAME " begin\n");
   DBG_OUTPUT_PORT.setDebugOutput(true);
 
-  oled();
-
   // Init IO to turn off fans during WifiSetup
-  setup_WaterCooler_IO();
+  setup_P1Logger_IO();
   
   SPIFFS.begin();
 
@@ -152,7 +148,7 @@ void setup(void) {
   });
   server.begin();
   DBG_OUTPUT_PORT.println("HTTP server started");
-  setup_WaterCooler();
+  setup_P1Logger();
   // Add service to MDNS-SD
   MDNS.addService("http", "tcp", 80);
 }
@@ -160,5 +156,5 @@ void setup(void) {
 void loop(void) {
   server.handleClient();
   MDNS.update();
-  loop_WaterCooler();
+  loop_P1Logger();
 }

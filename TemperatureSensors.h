@@ -5,7 +5,7 @@ void setupTempSensors();
 
 void reportTemperatures();
 
-String reportJSON();
+String reportAllJSON();
 
-float getTargetTemp();
+float getTemp();
 #endif
