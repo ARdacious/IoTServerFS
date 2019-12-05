@@ -13,6 +13,7 @@ def getTemps(server):
             l = int(r.headers['Content-Length'].split(',')[0])
             content = r.read(l)
         except:
+            global tempErrors
             tempErrors += 1
             sleep(3)
             r = urlopen(url)
