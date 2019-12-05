@@ -7,5 +7,7 @@ void reportTemperatures();
 
 String reportAllJSON();
 
+void handleTempList();
+
 float getTemp();
 #endif

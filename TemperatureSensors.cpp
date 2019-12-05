@@ -77,3 +77,26 @@ void reportAllJSON() {
 float getTemp() {
   return sensors.getTempCByIndex(0);
 }
+
+#include <ESP8266WebServer.h>
+
+extern ESP8266WebServer server;
+
+void handleTempList() {
+  Serial.println("Report All JSON temperature sensors:");
+  String output = "[";
+  int c = sensors.getDeviceCount();
+  int i;
+  float temp;
+  sensors.requestTemperatures();
+  for (i = 0; i < c; i++) {
+    temp = sensors.getTempCByIndex(i);
+    if (output != "[") {
+      output += ',';
+    }
+    output += "{\"temp" + String(i) + "\":" + String(temp) + "}";
+  }
+
+  output += "]";
+  server.send(200, "text/json", output);
+}

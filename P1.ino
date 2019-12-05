@@ -68,6 +68,7 @@ ESP8266WebServer server(80);
 ESP8266HTTPUpdateServer httpUpdater;
 
 #include "HttpMethods.h"
+#include "TemperatureSensors.h"
 
 #define LED 2
 
@@ -112,6 +113,8 @@ void setup(void) {
   httpUpdater.setup(&server, update_path, update_username, update_password);
   //list directory
   server.on("/list", HTTP_GET, handleFileList);
+  //get temperature
+  server.on("/temp", HTTP_GET, handleTempList);
   //load editor
   server.on("/edit", HTTP_GET, []() {
     if (!handleFileRead("/edit.htm")) {
