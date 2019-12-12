@@ -1,7 +1,7 @@
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
 
-#define MDNS_HOST_NAME "p1"
+#define MDNS_HOST_NAME "smoker"
 
 
 struct config {

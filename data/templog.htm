@@ -19,13 +19,6 @@ var myChart = new Chart(ctx, {
   type: 'line',
   data: {
     labels: [0,],
-    datasets: [{ 
-        data: [50,],
-        label: "Temperature",
-        borderColor: "#3e95cd",
-        fill: false
-      }
-    ]
   },
   options: {
     title: {
@@ -37,15 +30,10 @@ var myChart = new Chart(ctx, {
   }
 });
 
-  function addValue(a) {
-    if (a.includes("Sensor 0:")) {
-      var t = parseFloat(a.split(":")[1].replace(" ", "").replace("C",""));
+  function addValue(n, t) {
       myChart.data.labels.push(myChart.data.labels.length);
-      var id = myChart.data.datasets[0].data.push(t);
+      var id = myChart.data.datasets[n].data.push(t);
       myChart.update();
-    }
-    else {
-    }
   }
   var wsUri = 'ws://' + location.hostname + ':81/';
   var output;
@@ -84,7 +72,22 @@ var myChart = new Chart(ctx, {
   {
     writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
     try {
-      addValue(evt.data);
+      var colors = ["#3e95cd", "#ff0000", "#00ff00", "#0000ff"];
+  		var data = JSON.parse(evt.data);
+      myChart.data.labels.push(myChart.data.labels.length);
+  		for (var i = 0; i < data.length; i++) { 
+  		  if (myChart.data.datasets.length <= i) {
+  		    myChart.data.datasets.push({
+  		      label:data[i].name,
+  		      data:[],
+            borderColor: colors[i],
+            fill: false
+  		    });
+  		  }
+        var id = myChart.data.datasets[i].data.push(data[i].temp);
+        myChart.update();
+      }
+      //addValue(evt.data);
   	}
   	catch (err) {
   		writeToScreen(evt.data);

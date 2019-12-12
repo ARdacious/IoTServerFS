@@ -13,7 +13,7 @@ def listFiles(server):
         for f in files:
             print(f)
         return files
-server = 'p1.local'
+server = '192.168.1.14'
 for f in listFiles(server):
     if f['type'] == 'file':
         system('wget %s/%s -O %s/%s' % (server, f['name'], './data', f['name']))

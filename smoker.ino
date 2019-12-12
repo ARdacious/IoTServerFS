@@ -38,7 +38,7 @@
 #include <WebSocketsServer.h>
 
 // configure ESP.getVcc() usage
-ADC_MODE(ADC_VCC);
+//ADC_MODE(ADC_VCC);
 
 #define DBG_OUTPUT_PORT Serial
 
