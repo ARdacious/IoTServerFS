@@ -51,22 +51,27 @@ def On():
     print("on took", _dt)
     return time()-_s
 
-def waitForPeak():
+def waitForPeak(maxT, maxRise = 7, maxPeak = 35):
     _s = time()
+    dT = 0
     start = getTemp()
     t = start
     print('wait rise')
-    while t <= (start + 0.13):
+    while (t <= (start + 0.13)) and dT < maxRise:
         t = getTemp()
-        print (t, start-t)
+        dT = time()-_s
+        print (t, dT)
     print('rise start took:', time()-_s)
     _s = time()
     print('wait peak')
     maxT = t
-    while t >= (maxT - 0.13):
+    while (t >= (maxT - 0.13)) and dT < maxPeak:
         maxT = max(t, maxT)
         t = getTemp()
-        print (t, maxT-t)
+        dT = time() - _s
+        print (t, dT)
+        if maxT - t < 0:
+            Off()
     print('peak took: ', time()-_s)
     # return peak temperature
     return maxT
@@ -74,20 +79,24 @@ def waitForPeak():
 Off();
 
 volume = 0.75
-targetT = 65
+targetT = 75
 tAct = targetT
 while True:
     t = getTemp(verbose=False)
     watthrs = neededWattsH(targetT - t, volume)
     dT = neededTime(watthrs, 1800)
-    print("temp:", t, "time needed:", dT, "error:", tAct-targetT)
+    if dT >0 :
+        print("temp:", t, "time needed:", dT, "error:", tAct-targetT)
+    else:
+        print("temp:", t, "too high!", "error:", tAct-targetT)
     if dT > 0.6:
         print(watthrs, dT)
         On()
         sleep(dT)
         Off()
+        sleep(0.5)
         Off()
-        tAct = waitForPeak()
+        tAct = waitForPeak(maxT=targetT)
 
 exit()
 

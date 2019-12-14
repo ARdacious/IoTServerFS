@@ -5,6 +5,10 @@
 
 #include "P1Logger.h"
 
+#include <ESP8266WebServer.h>
+
+extern ESP8266WebServer server;
+
 // one wire on D1 / GPIO5
 #define ONE_WIRE_BUS  5
 
@@ -37,25 +41,6 @@ void setupTempSensors()
   }
 }
 
-void reportTemperatures()
-{
-  broadcast("Report temperature sensors:");
-  int c = sensors.getDeviceCount();
-  int i;
-  float temp;
-  sensors.requestTemperatures();
-  for (i = 0; i < c; i++) {
-    String msg = "";
-    msg += "Sensor ";
-    msg += String(i);
-    msg += ": ";
-    temp = sensors.getTempCByIndex(i);
-    msg += String(temp);
-    msg += "C";
-    broadcast(msg);
-  }
-}
-
 void reportAllJSON() {
   Serial.println("Report All JSON temperature sensors:");
   int c = sensors.getDeviceCount();
@@ -78,12 +63,24 @@ float getTemp() {
   return sensors.getTempCByIndex(0);
 }
 
-#include <ESP8266WebServer.h>
-
-extern ESP8266WebServer server;
+void reportTemperatures() {
+  String output = "[";
+  int c = sensors.getDeviceCount();
+  int i;
+  float temp;
+  sensors.requestTemperatures();
+  for (i = 0; i < c; i++) {
+    temp = sensors.getTempCByIndex(i);
+    if (output != "[") {
+      output += ',';
+    }
+    output += "{\"name\":\"Temp" + String(i) + "\", \"temp\":" + String(temp) + "}";
+  }
+  output += "]";
+  broadcast(output);
+}
 
 void handleTempList() {
-  Serial.println("Report All JSON temperature sensors:");
   String output = "[";
   int c = sensors.getDeviceCount();
   int i;

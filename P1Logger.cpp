@@ -71,7 +71,7 @@ using MyData = ParsedData<
   /* uint16_t */ gas_device_type,
 //  /* String */ gas_equipment_id,
   /* uint8_t */ gas_valve_position,
-//  /* TimestampedFixedValue */ gas_delivered,
+  /* TimestampedFixedValue */ gas_delivered,
   /* uint16_t */ thermal_device_type,
 //  /* String */ thermal_equipment_id,
   /* uint8_t */ thermal_valve_position,

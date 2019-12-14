@@ -26,7 +26,18 @@
         text: 'Temperature'
       },
       responsive:true,
-      maintainAspectRatio: false
+      maintainAspectRatio: false,
+      scales: {
+        yAxes: [{
+          id: 'current',
+          type: 'linear',
+          position: 'left',
+        }, {
+          id: 'total',
+          type: 'linear',
+          position: 'right',
+        }]
+      }
     }
   });
 
@@ -69,19 +80,29 @@
     try {
       var colors = ["#3e95cd", "#ff0000", "#00ff00", "#0000ff"];
   		var data = JSON.parse(evt.data);
-      myChart.data.labels.push(myChart.data.labels.length);
-  		for (var i = 0; i < data.length; i++) { 
-  		  if (myChart.data.datasets.length <= i) {
+  		  if (myChart.data.datasets.length <= 0) {
   		    myChart.data.datasets.push({
-  		      label:data[i].name,
+  		      label:"power",
   		      data:[],
-            borderColor: colors[i],
-            fill: false
+            borderColor: colors[0],
+            fill: false,
+            yAxisID: "current"
+  		    });
+  		    myChart.data.datasets.push({
+  		      label:"gas",
+  		      data:[],
+            borderColor: colors[1],
+            fill: false,
+            yAxisID: "total"
   		    });
   		  }
-        var id = myChart.data.datasets[i].data.push(data[i].temp);
-        myChart.update();
-      }
+  		  if (data.hasOwnProperty("power_delivered")) {
+          var id = myChart.data.datasets[0].data.push(data.power_delivered);
+          var id = myChart.data.datasets[1].data.push(data.gas_delivered);
+          myChart.data.labels.push(myChart.data.labels.length);
+          myChart.update();
+  		  }
+      
   	}
   	catch (err) {
   		writeToScreen(evt.data);
