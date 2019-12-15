@@ -95,10 +95,27 @@
             fill: false,
             yAxisID: "total"
   		    });
+  		    myChart.data.datasets.push({
+  		      label:"tarief 1",
+  		      data:[],
+            borderColor: colors[2],
+            fill: false,
+            yAxisID: "total"
+  		    });
+  		    myChart.data.datasets.push({
+  		      label:"tarief 2",
+  		      data:[],
+            borderColor: colors[3],
+            fill: false,
+            yAxisID: "total"
+  		    });
+  		    
   		  }
   		  if (data.hasOwnProperty("power_delivered")) {
-          var id = myChart.data.datasets[0].data.push(data.power_delivered);
-          var id = myChart.data.datasets[1].data.push(data.gas_delivered);
+          myChart.data.datasets[0].data.push(data.power_delivered);
+          myChart.data.datasets[1].data.push(data.gas_delivered);
+          myChart.data.datasets[2].data.push(data.energy_delivered_tariff1);
+          myChart.data.datasets[3].data.push(data.energy_delivered_tariff2);
           myChart.data.labels.push(myChart.data.labels.length);
           myChart.update();
   		  }
