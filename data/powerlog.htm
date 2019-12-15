@@ -48,6 +48,7 @@
   function init()
   {
     output = document.getElementById("output");
+    output.hidden = true;
     stat = document.getElementById("status");
     connectWebSocket();
   }
@@ -86,6 +87,7 @@
   		      data:[],
             borderColor: colors[0],
             fill: false,
+            pointRadius: 0,
             yAxisID: "current"
   		    });
   		    myChart.data.datasets.push({
@@ -93,6 +95,7 @@
   		      data:[],
             borderColor: colors[1],
             fill: false,
+            pointRadius: 0,
             yAxisID: "total"
   		    });
   		    myChart.data.datasets.push({
@@ -100,6 +103,7 @@
   		      data:[],
             borderColor: colors[2],
             fill: false,
+            pointRadius: 0,
             yAxisID: "total"
   		    });
   		    myChart.data.datasets.push({
@@ -107,6 +111,7 @@
   		      data:[],
             borderColor: colors[3],
             fill: false,
+            pointRadius: 0,
             yAxisID: "total"
   		    });
   		    

@@ -18,7 +18,6 @@
   var myChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: [0,],
     },
     options: {
       title: {
@@ -37,6 +36,7 @@
   function init()
   {
     output = document.getElementById("output");
+    output.hidden=true;
     stat = document.getElementById("status");
     connectWebSocket();
   }
@@ -69,19 +69,21 @@
     try {
       var colors = ["#3e95cd", "#ff0000", "#00ff00", "#0000ff"];
   		var data = JSON.parse(evt.data);
-      myChart.data.labels.push(myChart.data.labels.length);
-  		for (var i = 0; i < data.length; i++) { 
-  		  if (myChart.data.datasets.length <= i) {
-  		    myChart.data.datasets.push({
-  		      label:data[i].name,
-  		      data:[],
-            borderColor: colors[i],
-            fill: false
-  		    });
-  		  }
-        var id = myChart.data.datasets[i].data.push(data[i].temp);
+  		if (Array.isArray(data)) {
+    		for (var i = 0; i < data.length; i++) { 
+    		  if (myChart.data.datasets.length <= i) {
+    		    myChart.data.datasets.push({
+    		      label:data[i].name,
+    		      data:[],
+              borderColor: colors[i],
+              fill: false
+    		    });
+    		  }
+          var id = myChart.data.datasets[i].data.push(data[i].temp);
+        }
+        myChart.data.labels.push(myChart.data.labels.length);
         myChart.update();
-      }
+  		}
   	}
   	catch (err) {
   		writeToScreen(evt.data);
