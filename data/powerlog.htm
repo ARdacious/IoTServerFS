@@ -6,6 +6,9 @@
     <div id="status">
       status
     </div>
+    <div id="connection">
+      connection status
+    </div>
     <div id="output">
       output
     </div>
@@ -18,7 +21,7 @@
   var myChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: [0,],
+      labels: [],
     },
     options: {
       title: {
@@ -44,12 +47,14 @@
   var wsUri = 'ws://' + location.hostname + ':81/';
   var output;
   var stat;
+  var conn;
 
   function init()
   {
     output = document.getElementById("output");
     output.hidden = true;
     stat = document.getElementById("status");
+    conn = document.getElementById("connection");
     connectWebSocket();
   }
 
@@ -60,10 +65,12 @@
     websocket.onclose = function(evt) { onClose(evt) };
     websocket.onmessage = function(evt) { onMessage(evt) };
     websocket.onerror = function(evt) { onError(evt) };
+    conn.textContent = "Initializing connection...";
   }
 
   function onOpen(evt)
   {
+    conn.textContent = "Connected";
     writeToScreen("CONNECTED");
     doSend("WebSocket rocks");
     //document.getElementById("gages").style.display = "";
@@ -71,6 +78,7 @@
 
   function onClose(evt)
   {
+    conn.textContent = "Connection closed!";
     writeToScreen("DISCONNECTED");
     //document.getElementById("gages").style.display = "none";
   }
@@ -117,11 +125,14 @@
   		    
   		  }
   		  if (data.hasOwnProperty("power_delivered")) {
+          var now = new Date();
+          var stamp = now.toLocaleString();
+          stat.textContent = "Last message received at: " + stamp;
+          myChart.data.labels.push(stamp);
           myChart.data.datasets[0].data.push(data.power_delivered);
           myChart.data.datasets[1].data.push(data.gas_delivered);
           myChart.data.datasets[2].data.push(data.energy_delivered_tariff1);
           myChart.data.datasets[3].data.push(data.energy_delivered_tariff2);
-          myChart.data.labels.push(myChart.data.labels.length);
           myChart.update();
   		  }
       
@@ -134,6 +145,7 @@
 
   function onError(evt)
   {
+    conn.textContent = '<span style="color: red;">ERROR:</span> ' + evt.data;
     writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
     //document.getElementById("gages").style.display = "none";
   }
