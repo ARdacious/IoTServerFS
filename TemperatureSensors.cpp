@@ -63,6 +63,11 @@ struct SousVideConfig {
   float mass = 1500;
   unsigned long tsOff = 0;
   unsigned long tsOn = 0;
+  float maxOn = 0.75;
+  unsigned long offTime = 60 * 1000;
+  float startT = 0;
+  float inputJoule = 0;
+  float onTime = 0;
 };
 
 struct SousVideConfig cfg;
@@ -92,7 +97,7 @@ void controlTemperature() {
     if (millis() > cfg.tsOff) {
       mainHeater(false);
       cfg.tsOff = 0;
-      cfg.tsOn = millis() + (30 * 1000);
+      cfg.tsOn = millis() + cfg.offTime;
       webSocket.broadcastTXT("heater off, waiting");
     }
   }
@@ -100,14 +105,32 @@ void controlTemperature() {
     if (millis() > cfg.tsOn) {
       cfg.tsOn = 0;
       webSocket.broadcastTXT("waiting done: current temp "+String(cfg.fromT));
+      if (cfg.startT > 0) {
+        // try to determine mass
+        // joule = m * coef * dT
+        // m = joule / (coef * dT)
+        float dT = getTemp() - cfg.startT;
+        if (cfg.onTime > 10000 || dT > 2) {
+          // only update mass if confidence
+          float mass = cfg.inputJoule / (dT * cfg.coef);
+          webSocket.broadcastTXT("determined mass: "+String(mass) + ", dT="+String(dT)+", inputJoule="+String(cfg.inputJoule));
+          cfg.mass = mass;
+        }
+        cfg.inputJoule = 0;
+        cfg.startT = 0;
+      }
     }
   }
   else {
-    float joule = cfg.mass * cfg.coef * (cfg.toT - cfg.fromT);
-    int timeOn = joule / cfg.watt;
+    float joule = cfg.mass * cfg.coef * (cfg.toT - cfg.fromT) * cfg.maxOn;
+    float timeOn = (joule * 1000 / cfg.watt) ;
     if (timeOn > 0) {
-      timeOn = min(timeOn, 20);
-      cfg.tsOff = millis() + (timeOn * 1000);
+      cfg.tsOff = millis() + (int)timeOn;
+      // store start temperature and input joule
+      cfg.inputJoule = joule;
+      cfg.startT = getTemp();
+      cfg.onTime = timeOn;
+      // give some feedback
       webSocket.broadcastTXT("current temp:" + String(cfg.fromT) + ", desired T: "+ String(cfg.toT));
       webSocket.broadcastTXT("control joule needed:" + String(joule) + ", timeOn: "+ String(timeOn));
       mainHeater(true);
@@ -128,6 +151,8 @@ void handleCommand(char * command) {
       webSocket.broadcastTXT("fromT:" + String(cfg.fromT));
       webSocket.broadcastTXT("mass:" + String(cfg.mass));
       webSocket.broadcastTXT("Watt:" + String(cfg.watt));
+      webSocket.broadcastTXT("maxOn:" + String(cfg.maxOn));
+      webSocket.broadcastTXT("offTime:" + String(cfg.offTime));
     }
     else if (ch == 'o') {
       mode = 0;
@@ -169,34 +194,41 @@ void handleCommand(char * command) {
       //mode = 0;
       mainHeater(1);
     }
-    else if (ch == 'P') {
-      // P? = transfered wattage
-      String val = String(command);
-      val = val.substring(1);
-      cfg.watt = val.toFloat();
-      webSocket.broadcastTXT("Set watt!" + String(cfg.watt));
-    }
-    else if (ch == 'F') {
-      // F = from Temperature
-      String val = String(command);
-      val = val.substring(1);
-      cfg.fromT = val.toFloat();
-      webSocket.broadcastTXT("Set fromT!" + String(cfg.fromT));
-    }
-    else if (ch == 'T') {
-      // T = desired Temperature
-      String val = String(command);
-      val = val.substring(1);
+    else {
+      String full = String(command);
+      String cmd = full.substring(0,4);
+      String val = full.substring(4);
       webSocket.broadcastTXT("String to parse:" + val);
-      cfg.toT = val.toFloat();
-      webSocket.broadcastTXT("Set toT!" + String(cfg.toT));
-    }
-    else if (ch == 'M') {
-      // M = mass
-      String val = String(command);
-      val = val.substring(1);
-      cfg.mass = val.toFloat();
-      webSocket.broadcastTXT("Set mass!"+ String(cfg.mass));
+      if (cmd.equals("WATT")) {
+        // P? = transfered wattage
+        cfg.watt = val.toFloat();
+        webSocket.broadcastTXT("Set watt!" + String(cfg.watt));
+      }
+      else if (cmd.equals("FRMT")) {
+        // F = from Temperature
+        cfg.fromT = val.toFloat();
+        webSocket.broadcastTXT("Set fromT!" + String(cfg.fromT));
+      }
+      else if (cmd.equals("TOOT")) {
+        // T = desired Temperature
+        cfg.toT = val.toFloat();
+        webSocket.broadcastTXT("Set toT!" + String(cfg.toT));
+      }
+      else if (cmd.equals("MASS")) {
+        // M = mass
+        cfg.mass = val.toFloat();
+        webSocket.broadcastTXT("Set mass!"+ String(cfg.mass));
+      }
+      else if (cmd.equals("MXON")) {
+        // M = mass
+        cfg.maxOn = val.toFloat();
+        webSocket.broadcastTXT("Set maxOn!"+ String(cfg.maxOn));
+      }
+      else if (cmd.equals("OFFT")) {
+        // M = mass
+        cfg.offTime = val.toInt();
+        webSocket.broadcastTXT("Set offTime!"+ String(cfg.offTime));
+      }
     }
 }
 
@@ -314,13 +346,20 @@ void reportTemperatures() {
     if (output != "[") {
       output += ',';
     }
-    output += "{\"name\":\"Temp" + String(i) + "\", \"temp\":" + String(temp) + "}";
+    output += "{\"name\":\"Probe " + String(i) + "\", \"temp\":" + String(temp) + "}";
   }
+  // base sensor
   if (output != "[") {
     output += ',';
   }
   temp = getAnalogTemp();
-  output += "{\"name\":\"Temp" + String(i++) + "\", \"temp\":" + String(temp) + "}";
+  output += "{\"name\":\"Base\", \"temp\":" + String(temp) + "}";
+  // set toT
+  if (output != "[") {
+    output += ',';
+  }
+  temp = cfg.toT;
+  output += "{\"name\":\"To Temp\", \"temp\":" + String(temp) + "}";
   output += "]";
   broadcast(output);
 }
