@@ -1,5 +1,8 @@
 <html>
-  <body>
+  <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+  <body onkeypress="javascript:sendkey(event);">
     <div>
       <canvas id="myChart"  width="400px" height="400px"></canvas>
     </div>
@@ -36,7 +39,7 @@
   function init()
   {
     output = document.getElementById("output");
-    output.hidden=true;
+    output.hidden=false;
     stat = document.getElementById("status");
     connectWebSocket();
   }
@@ -65,7 +68,6 @@
 
   function onMessage(evt)
   {
-    writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
     try {
       var colors = ["#3e95cd", "#ff0000", "#00ff00", "#0000ff"];
   		var data = JSON.parse(evt.data);
@@ -86,7 +88,7 @@
   		}
   	}
   	catch (err) {
-  		writeToScreen(evt.data);
+      writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
   		stat.textContent = evt.data;
   	}
   }
@@ -102,6 +104,10 @@
     writeToScreen("SENT: " + message);
     websocket.send(message);
   }
+  function sendkey(event) {
+    doSend(event.key);
+  }
+  
 
   function dumpvals()
   {
@@ -120,7 +126,7 @@
   	var pre = document.createElement("p");
   	pre.style.wordWrap = "break-word";
   	pre.innerHTML = message;
-  	output.appendChild(pre);
+  	output.insertBefore(pre, output.childNodes[0])
   }
 
   window.addEventListener("load", init, false);

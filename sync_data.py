@@ -3,6 +3,7 @@
 from urllib.request import urlopen
 from json import loads
 from os import system
+import sys
 
 def listFiles(server):
         url = "http://%s/list?dir=/" % server
@@ -13,7 +14,10 @@ def listFiles(server):
         for f in files:
             print(f)
         return files
-server = 'p1.local'
+
+server = sys.argv[1]
+print(sys.argv, server)
+
 for f in listFiles(server):
     if f['type'] == 'file':
         system('wget %s/%s -O %s/%s' % (server, f['name'], './data', f['name']))
