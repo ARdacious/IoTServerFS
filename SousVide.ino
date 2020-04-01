@@ -56,8 +56,6 @@
 
 #include "Config.h"
 
-struct config cfg;
-
 const char* host = MDNS_HOST_NAME;
 const char* update_path = "/firmware";
 const char* update_username = "admin";
