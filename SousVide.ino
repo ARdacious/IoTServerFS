@@ -30,6 +30,7 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
+#include <ESP8266FtpServer.h>
 #include <ESP8266mDNS.h>
 
 #include <ESP8266HTTPUpdateServer.h>
@@ -38,7 +39,7 @@
 #include <WebSocketsServer.h>
 
 // configure ESP.getVcc() usage
-ADC_MODE(ADC_VCC);
+//ADC_MODE(ADC_VCC);
 
 #define DBG_OUTPUT_PORT Serial
 
@@ -46,8 +47,6 @@ ADC_MODE(ADC_VCC);
 
 // Filesystem stuff
 #include <FS.h>
-
-#include "P1Logger.h"
 
 /*
   The blue LED on the ESP-01 module is connected to GPIO1
@@ -66,25 +65,38 @@ const char* update_password = "admin";
 
 ESP8266WebServer server(80);
 ESP8266HTTPUpdateServer httpUpdater;
+FtpServer ftpSrv; 
 
 #include "HttpMethods.h"
 #include "TemperatureSensors.h"
 
 #define LED 2
+extern "C" {
+#include <user_interface.h>
+}
 
+  
 void setup(void) {
+
+  // Init IO to turn off heating
+  pinMode(16 , OUTPUT);
+  digitalWrite(16, LOW);
+  pinMode(5 , OUTPUT);
+  digitalWrite(5, LOW);
+
   DBG_OUTPUT_PORT.begin(115200);
   DBG_OUTPUT_PORT.print("\n");
   DBG_OUTPUT_PORT.print(MDNS_HOST_NAME " begin\n");
   DBG_OUTPUT_PORT.setDebugOutput(true);
 
-  // Init IO to turn off fans during WifiSetup
-  setup_P1Logger_IO();
+  setup_Temperature();
   
+
   SPIFFS.begin();
 
   listFiles();
 
+  wifi_set_sleep_type(NONE_SLEEP_T);
   //WIFI INIT
   DBG_OUTPUT_PORT.printf("Connecting to %s\n", ssid);
   if (String(WiFi.SSID()) != String(ssid)) {
@@ -151,13 +163,17 @@ void setup(void) {
   });
   server.begin();
   DBG_OUTPUT_PORT.println("HTTP server started");
-  setup_P1Logger();
+
+  ftpSrv.begin("esp8266","esp8266");  
+  DBG_OUTPUT_PORT.println("FTP server started");
   // Add service to MDNS-SD
   MDNS.addService("http", "tcp", 80);
+  MDNS.addService("ftp", "tcp", 21);
 }
 
 void loop(void) {
   server.handleClient();
+  ftpSrv.handleFTP();
   MDNS.update();
-  loop_P1Logger();
+  loop_Temperature();
 }
