@@ -1,0 +1,1256 @@
+Client connected...
+c
+Mode switch!
+Auto temp
+waiting:c current temp 20.75
+TOOT25
+String to parse:25
+Set toT!25.00
+TOOT30
+String to parse:30
+Set toT!30.00
+waiting done: current temp 20.75
+current temp:20.75, desired T: 30.00
+control joule needed:43539.75, timeOn: 49476.99
+TOOT35
+String to parse:35
+Set toT!35.00
+TOOT40
+String to parse:40
+Set toT!40.00
+TOOT45
+String to parse:45
+Set toT!45.00
+TOOT50
+String to parse:50
+Set toT!50.00
+o
+Both off!
+TOOT55
+String to parse:55
+Set toT!55.00
+TOOT20
+String to parse:20
+Set toT!20.00
+o
+Both off!
+Client connected...
+o
+Both off!
+c
+Mode switch!
+Auto temp
+waiting:c current temp 24.94
+TOOT25
+String to parse:25
+Set toT!25.00
+waiting done: current temp 25.12
+determined mass: 2378.57, dT=4.37, inputJoule=43539.75
+waiting:c current temp 25.12
+waiting done: current temp 24.94
+current temp:24.94, desired T: 25.00
+control joule needed:294.19, timeOn: 334.30
+heater off, waiting
+waiting done: current temp 24.69
+current temp:24.69, desired T: 25.00
+control joule needed:1470.94, timeOn: 1671.52
+heater off, waiting
+waiting done: current temp 24.94
+current temp:24.94, desired T: 25.00
+control joule needed:294.19, timeOn: 334.30
+heater off, waiting
+waiting done: current temp 24.94
+current temp:24.94, desired T: 25.00
+control joule needed:294.19, timeOn: 334.30
+heater off, waiting
+waiting done: current temp 25.12
+waiting:c current temp 25.12
+waiting done: current temp 25.19
+waiting:c current temp 25.19
+waiting done: current temp 25.12
+waiting:c current temp 25.12
+waiting done: current temp 25.12
+waiting:c current temp 25.12
+waiting done: current temp 25.12
+waiting:c current temp 25.12
+waiting done: current temp 25.06
+waiting:c current temp 25.06
+waiting done: current temp 25.12
+waiting:c current temp 25.12
+waiting done: current temp 25.06
+waiting:c current temp 25.06
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 24.94
+current temp:24.94, desired T: 25.00
+control joule needed:294.19, timeOn: 334.30
+heater off, waiting
+waiting done: current temp 24.94
+current temp:24.94, desired T: 25.00
+control joule needed:294.19, timeOn: 334.30
+heater off, waiting
+waiting done: current temp 24.94
+current temp:24.94, desired T: 25.00
+control joule needed:294.19, timeOn: 334.30
+heater off, waiting
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 24.94
+current temp:24.94, desired T: 25.00
+control joule needed:294.19, timeOn: 334.30
+heater off, waiting
+waiting done: current temp 24.94
+current temp:24.94, desired T: 25.00
+control joule needed:294.19, timeOn: 334.30
+heater off, waiting
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+TOOT30
+String to parse:30
+Set toT!30.00
+waiting done: current temp 25.00
+current temp:25.00, desired T: 30.00
+control joule needed:23535.00, timeOn: 26744.32
+heater off, waiting
+waiting done: current temp 27.13
+determined mass: 2647.06, dT=2.12, inputJoule=23535.00
+current temp:27.13, desired T: 30.00
+control joule needed:13532.62, timeOn: 15377.98
+heater off, waiting
+waiting done: current temp 28.87
+determined mass: 1848.21, dT=1.75, inputJoule=13532.62
+current temp:28.87, desired T: 30.00
+control joule needed:5295.37, timeOn: 6017.47
+heater off, waiting
+waiting done: current temp 28.62
+current temp:28.62, desired T: 30.00
+control joule needed:6472.12, timeOn: 7354.69
+heater off, waiting
+waiting done: current temp 29.69
+current temp:29.69, desired T: 30.00
+control joule needed:1470.94, timeOn: 1671.52
+heater off, waiting
+waiting done: current temp 29.44
+current temp:29.44, desired T: 30.00
+control joule needed:2647.69, timeOn: 3008.74
+heater off, waiting
+waiting done: current temp 29.87
+current temp:29.87, desired T: 30.00
+control joule needed:588.37, timeOn: 668.61
+heater off, waiting
+waiting done: current temp 29.75
+current temp:29.75, desired T: 30.00
+control joule needed:1176.75, timeOn: 1337.22
+heater off, waiting
+waiting done: current temp 29.81
+current temp:29.81, desired T: 30.00
+control joule needed:882.56, timeOn: 1002.91
+heater off, waiting
+waiting done: current temp 29.94
+current temp:29.94, desired T: 30.00
+control joule needed:294.19, timeOn: 334.30
+heater off, waiting
+waiting done: current temp 29.94
+current temp:29.94, desired T: 30.00
+control joule needed:294.19, timeOn: 334.30
+heater off, waiting
+waiting done: current temp 29.94
+current temp:29.94, desired T: 30.00
+control joule needed:294.19, timeOn: 334.30
+heater off, waiting
+waiting done: current temp 29.81
+current temp:29.81, desired T: 30.00
+control joule needed:882.56, timeOn: 1002.91
+heater off, waiting
+waiting done: current temp 29.87
+current temp:29.87, desired T: 30.00
+control joule needed:588.37, timeOn: 668.61
+heater off, waiting
+TOOT35
+String to parse:35
+Set toT!35.00
+waiting done: current temp 29.87
+current temp:29.87, desired T: 35.00
+control joule needed:24123.38, timeOn: 27412.93
+heater off, waiting
+waiting done: current temp 32.13
+determined mass: 2562.50, dT=2.25, inputJoule=24123.38
+current temp:32.13, desired T: 35.00
+control joule needed:13532.62, timeOn: 15377.98
+heater off, waiting
+waiting done: current temp 33.00
+determined mass: 3696.43, dT=0.88, inputJoule=13532.62
+current temp:33.00, desired T: 35.00
+control joule needed:9414.00, timeOn: 10697.73
+heater off, waiting
+waiting done: current temp 33.69
+determined mass: 3272.73, dT=0.69, inputJoule=9414.00
+current temp:33.69, desired T: 35.00
+control joule needed:6177.94, timeOn: 7020.38
+heater off, waiting
+waiting done: current temp 34.38
+current temp:34.38, desired T: 35.00
+control joule needed:2941.88, timeOn: 3343.04
+heater off, waiting
+waiting done: current temp 35.00
+waiting:c current temp 35.00
+waiting done: current temp 34.94
+current temp:34.94, desired T: 35.00
+control joule needed:294.19, timeOn: 334.30
+heater off, waiting
+waiting done: current temp 34.88
+current temp:34.88, desired T: 35.00
+control joule needed:588.37, timeOn: 668.61
+heater off, waiting
+waiting done: current temp 34.81
+current temp:34.81, desired T: 35.00
+control joule needed:882.56, timeOn: 1002.91
+heater off, waiting
+waiting done: current temp 34.69
+current temp:34.69, desired T: 35.00
+control joule needed:1470.94, timeOn: 1671.52
+heater off, waiting
+waiting done: current temp 34.94
+current temp:34.94, desired T: 35.00
+control joule needed:294.19, timeOn: 334.30
+heater off, waiting
+waiting done: current temp 34.81
+current temp:34.81, desired T: 35.00
+control joule needed:882.56, timeOn: 1002.91
+heater off, waiting
+waiting done: current temp 34.75
+current temp:34.75, desired T: 35.00
+control joule needed:1176.75, timeOn: 1337.22
+heater off, waiting
+waiting done: current temp 34.81
+current temp:34.81, desired T: 35.00
+control joule needed:882.56, timeOn: 1002.91
+heater off, waiting
+waiting done: current temp 34.81
+current temp:34.81, desired T: 35.00
+control joule needed:882.56, timeOn: 1002.91
+heater off, waiting
+TOOT40
+String to parse:40
+Set toT!40.00
+waiting done: current temp 34.88
+current temp:34.88, desired T: 40.00
+control joule needed:24123.38, timeOn: 27412.93
+heater off, waiting
+waiting done: current temp 36.94
+determined mass: 2795.45, dT=2.06, inputJoule=24123.38
+current temp:36.94, desired T: 40.00
+control joule needed:14415.19, timeOn: 16380.90
+heater off, waiting
+waiting done: current temp 38.00
+determined mass: 3242.65, dT=1.06, inputJoule=14415.19
+current temp:38.00, desired T: 40.00
+control joule needed:9414.00, timeOn: 10697.73
+heater off, waiting
+waiting done: current temp 38.69
+determined mass: 3272.73, dT=0.69, inputJoule=9414.00
+current temp:38.69, desired T: 40.00
+control joule needed:6177.94, timeOn: 7020.38
+heater off, waiting
+waiting done: current temp 39.44
+current temp:39.44, desired T: 40.00
+control joule needed:2647.69, timeOn: 3008.74
+heater off, waiting
+waiting done: current temp 39.94
+current temp:39.94, desired T: 40.00
+control joule needed:294.19, timeOn: 334.30
+heater off, waiting
+waiting done: current temp 39.94
+current temp:39.94, desired T: 40.00
+control joule needed:294.19, timeOn: 334.30
+heater off, waiting
+waiting done: current temp 39.81
+current temp:39.81, desired T: 40.00
+control joule needed:882.56, timeOn: 1002.91
+heater off, waiting
+waiting done: current temp 39.81
+current temp:39.81, desired T: 40.00
+control joule needed:882.56, timeOn: 1002.91
+heater off, waiting
+waiting done: current temp 39.69
+current temp:39.69, desired T: 40.00
+control joule needed:1470.94, timeOn: 1671.52
+heater off, waiting
+waiting done: current temp 39.75
+current temp:39.75, desired T: 40.00
+control joule needed:1176.75, timeOn: 1337.22
+heater off, waiting
+waiting done: current temp 39.81
+current temp:39.81, desired T: 40.00
+control joule needed:882.56, timeOn: 1002.91
+heater off, waiting
+waiting done: current temp 39.75
+current temp:39.75, desired T: 40.00
+control joule needed:1176.75, timeOn: 1337.22
+heater off, waiting
+waiting done: current temp 39.81
+current temp:39.81, desired T: 40.00
+control joule needed:882.56, timeOn: 1002.91
+heater off, waiting
+TOOT45
+String to parse:45
+Set toT!45.00
+waiting done: current temp 39.75
+current temp:39.75, desired T: 45.00
+control joule needed:24711.75, timeOn: 28081.53
+heater off, waiting
+waiting done: current temp 41.75
+determined mass: 2953.13, dT=2.00, inputJoule=24711.75
+current temp:41.75, desired T: 45.00
+control joule needed:15297.75, timeOn: 17383.81
+heater off, waiting
+waiting done: current temp 43.06
+determined mass: 2785.71, dT=1.31, inputJoule=15297.75
+current temp:43.06, desired T: 45.00
+control joule needed:9119.81, timeOn: 10363.42
+heater off, waiting
+waiting done: current temp 43.63
+determined mass: 3875.00, dT=0.56, inputJoule=9119.81
+current temp:43.63, desired T: 45.00
+control joule needed:6472.12, timeOn: 7354.69
+heater off, waiting
+waiting done: current temp 44.44
+current temp:44.44, desired T: 45.00
+control joule needed:2647.69, timeOn: 3008.74
+heater off, waiting
+waiting done: current temp 44.69
+current temp:44.69, desired T: 45.00
+control joule needed:1470.94, timeOn: 1671.52
+heater off, waiting
+waiting done: current temp 44.69
+current temp:44.69, desired T: 45.00
+control joule needed:1470.94, timeOn: 1671.52
+heater off, waiting
+waiting done: current temp 44.75
+current temp:44.75, desired T: 45.00
+control joule needed:1176.75, timeOn: 1337.22
+heater off, waiting
+waiting done: current temp 44.69
+current temp:44.69, desired T: 45.00
+control joule needed:1470.94, timeOn: 1671.52
+heater off, waiting
+waiting done: current temp 44.75
+current temp:44.75, desired T: 45.00
+control joule needed:1176.75, timeOn: 1337.22
+heater off, waiting
+waiting done: current temp 44.63
+current temp:44.63, desired T: 45.00
+control joule needed:1765.13, timeOn: 2005.82
+heater off, waiting
+waiting done: current temp 44.75
+current temp:44.75, desired T: 45.00
+control joule needed:1176.75, timeOn: 1337.22
+heater off, waiting
+waiting done: current temp 44.69
+current temp:44.69, desired T: 45.00
+control joule needed:1470.94, timeOn: 1671.52
+heater off, waiting
+TOOT50
+String to parse:50
+Set toT!50.00
+waiting done: current temp 44.69
+current temp:44.69, desired T: 50.00
+control joule needed:25005.94, timeOn: 28415.84
+heater off, waiting
+waiting done: current temp 46.69
+determined mass: 2988.28, dT=2.00, inputJoule=25005.94
+current temp:46.69, desired T: 50.00
+control joule needed:15591.94, timeOn: 17718.11
+heater off, waiting
+waiting done: current temp 47.69
+determined mass: 3726.56, dT=1.00, inputJoule=15591.94
+current temp:47.69, desired T: 50.00
+control joule needed:10884.94, timeOn: 12369.25
+heater off, waiting
+waiting done: current temp 49.06
+determined mass: 1892.05, dT=1.37, inputJoule=10884.94
+current temp:49.06, desired T: 50.00
+control joule needed:4412.81, timeOn: 5014.56
+heater off, waiting
+waiting done: current temp 49.38
+current temp:49.38, desired T: 50.00
+control joule needed:2941.88, timeOn: 3343.04
+heater off, waiting
+waiting done: current temp 49.44
+current temp:49.44, desired T: 50.00
+control joule needed:2647.69, timeOn: 3008.74
+heater off, waiting
+waiting done: current temp 49.44
+current temp:49.50, desired T: 50.00
+control joule needed:2353.50, timeOn: 2674.43
+heater off, waiting
+waiting done: current temp 49.63
+current temp:49.63, desired T: 50.00
+control joule needed:1765.13, timeOn: 2005.82
+heater off, waiting
+waiting done: current temp 49.50
+current temp:49.50, desired T: 50.00
+control joule needed:2353.50, timeOn: 2674.43
+heater off, waiting
+waiting done: current temp 49.75
+current temp:49.75, desired T: 50.00
+control joule needed:1176.75, timeOn: 1337.22
+heater off, waiting
+waiting done: current temp 49.50
+current temp:49.50, desired T: 50.00
+control joule needed:2353.50, timeOn: 2674.43
+heater off, waiting
+waiting done: current temp 49.63
+current temp:49.63, desired T: 50.00
+control joule needed:1765.13, timeOn: 2005.82
+heater off, waiting
+waiting done: current temp 49.56
+current temp:49.56, desired T: 50.00
+control joule needed:2059.31, timeOn: 2340.13
+heater off, waiting
+waiting done: current temp 49.75
+current temp:49.75, desired T: 50.00
+control joule needed:1176.75, timeOn: 1337.22
+heater off, waiting
+TOOT55
+String to parse:55
+Set toT!55.00
+waiting done: current temp 49.56
+current temp:49.56, desired T: 55.00
+control joule needed:25594.31, timeOn: 29084.45
+heater off, waiting
+waiting done: current temp 51.56
+determined mass: 3058.59, dT=2.00, inputJoule=25594.31
+current temp:51.56, desired T: 55.00
+control joule needed:16180.31, timeOn: 18386.72
+heater off, waiting
+waiting done: current temp 52.81
+determined mass: 3093.75, dT=1.25, inputJoule=16180.31
+current temp:52.81, desired T: 55.00
+control joule needed:10296.56, timeOn: 11700.64
+heater off, waiting
+waiting done: current temp 53.75
+determined mass: 2625.00, dT=0.94, inputJoule=10296.56
+current temp:53.75, desired T: 55.00
+control joule needed:5883.75, timeOn: 6686.08
+heater off, waiting
+waiting done: current temp 54.56
+current temp:54.56, desired T: 55.00
+control joule needed:2059.31, timeOn: 2340.13
+heater off, waiting
+waiting done: current temp 54.19
+current temp:54.19, desired T: 55.00
+control joule needed:3824.44, timeOn: 4345.95
+heater off, waiting
+waiting done: current temp 54.56
+current temp:54.56, desired T: 55.00
+control joule needed:2059.31, timeOn: 2340.13
+heater off, waiting
+waiting done: current temp 54.25
+current temp:54.25, desired T: 55.00
+control joule needed:3530.25, timeOn: 4011.65
+heater off, waiting
+waiting done: current temp 54.56
+current temp:54.56, desired T: 55.00
+control joule needed:2059.31, timeOn: 2340.13
+heater off, waiting
+waiting done: current temp 54.44
+current temp:54.44, desired T: 55.00
+control joule needed:2647.69, timeOn: 3008.74
+heater off, waiting
+waiting done: current temp 54.56
+current temp:54.56, desired T: 55.00
+control joule needed:2059.31, timeOn: 2340.13
+heater off, waiting
+waiting done: current temp 54.56
+current temp:54.56, desired T: 55.00
+control joule needed:2059.31, timeOn: 2340.13
+heater off, waiting
+waiting done: current temp 54.56
+current temp:54.56, desired T: 55.00
+control joule needed:2059.31, timeOn: 2340.13
+heater off, waiting
+TOOT20
+String to parse:20
+Set toT!20.00
+o
+Both off!
+Client connected...
+o
+Both off!
+c
+Mode switch!
+Auto temp
+waiting:c current temp 41.94
+TOOT98
+String to parse:98
+Set toT!98.00
+waiting done: current temp 41.94
+current temp:41.94, desired T: 98.00
+control joule needed:263886.19, timeOn: 299870.69
+heater off, waiting
+waiting done: current temp 64.56
+determined mass: 2787.64, dT=22.62, inputJoule=263886.19
+current temp:64.56, desired T: 98.00
+control joule needed:157390.31, timeOn: 178852.64
+heater off, waiting
+waiting done: current temp 78.06
+determined mass: 2786.46, dT=13.50, inputJoule=157390.31
+current temp:78.06, desired T: 98.00
+control joule needed:93845.81, timeOn: 106642.98
+heater off, waiting
+waiting done: current temp 86.12
+determined mass: 2781.98, dT=8.06, inputJoule=93845.81
+current temp:86.12, desired T: 98.00
+control joule needed:55895.63, timeOn: 63517.75
+heater off, waiting
+waiting done: current temp 90.06
+determined mass: 3392.86, dT=3.94, inputJoule=55895.63
+current temp:90.06, desired T: 98.00
+control joule needed:37361.81, timeOn: 42456.61
+TOOT20
+String to parse:20
+Set toT!20.00
+o
+Both off!
+Client connected...
+o
+Both off!
+c
+Mode switch!
+Auto temp
+waiting:c current temp 89.94
+TOOT98
+String to parse:98
+Set toT!98.00
+waiting done: current temp 89.69
+determined mass: -23812.50, dT=-0.37, inputJoule=37361.81
+current temp:89.69, desired T: 98.00
+control joule needed:39126.94, timeOn: 44462.43
+heater off, waiting
+waiting done: current temp 92.69
+determined mass: 3117.19, dT=3.00, inputJoule=39126.94
+current temp:92.69, desired T: 98.00
+control joule needed:25005.94, timeOn: 28415.84
+heater off, waiting
+waiting done: current temp 94.44
+determined mass: 3415.18, dT=1.75, inputJoule=25005.94
+current temp:94.44, desired T: 98.00
+control joule needed:16768.69, timeOn: 19055.33
+heater off, waiting
+waiting done: current temp 94.94
+determined mass: 8015.62, dT=0.50, inputJoule=16768.69
+current temp:94.94, desired T: 98.00
+control joule needed:14415.19, timeOn: 16380.90
+heater off, waiting
+waiting done: current temp 95.50
+determined mass: 6125.00, dT=0.56, inputJoule=14415.19
+current temp:95.50, desired T: 98.00
+control joule needed:11767.50, timeOn: 13372.16
+heater off, waiting
+waiting done: current temp 96.12
+determined mass: 4500.00, dT=0.62, inputJoule=11767.50
+current temp:96.12, desired T: 98.00
+control joule needed:8825.62, timeOn: 10029.12
+heater off, waiting
+waiting done: current temp 95.87
+determined mass: -8437.50, dT=-0.25, inputJoule=8825.62
+current temp:95.87, desired T: 98.00
+control joule needed:10002.37, timeOn: 11366.33
+heater off, waiting
+waiting done: current temp 96.19
+determined mass: 7650.00, dT=0.31, inputJoule=10002.37
+current temp:96.12, desired T: 98.00
+control joule needed:8825.62, timeOn: 10029.12
+heater off, waiting
+waiting done: current temp 96.12
+determined mass: inf, dT=0.00, inputJoule=8825.62
+current temp:96.12, desired T: 98.00
+control joule needed:8825.62, timeOn: 10029.12
+heater off, waiting
+waiting done: current temp 95.94
+determined mass: -11250.00, dT=-0.19, inputJoule=8825.62
+current temp:95.94, desired T: 98.00
+control joule needed:9708.19, timeOn: 11032.03
+heater off, waiting
+waiting done: current temp 95.94
+determined mass: inf, dT=0.00, inputJoule=9708.19
+current temp:95.94, desired T: 98.00
+control joule needed:9708.19, timeOn: 11032.03
+heater off, waiting
+waiting done: current temp 96.00
+determined mass: 37125.00, dT=0.06, inputJoule=9708.19
+current temp:96.00, desired T: 98.00
+control joule needed:9414.00, timeOn: 10697.73
+heater off, waiting
+TOOT20
+String to parse:20
+Set toT!20.00
+o
+Both off!
+Client connected...
+Client connected...
+Client connected...
+o
+Both off!
+c
+Mode switch!
+Auto temp
+waiting:c current temp 38.81
+TOOT55
+String to parse:55
+Set toT!55.00
+waiting done: current temp 38.88
+determined mass: -39.39, dT=-57.13, inputJoule=9414.00
+current temp:38.88, desired T: 55.00
+control joule needed:75900.38, timeOn: 86250.43
+heater off, waiting
+waiting done: current temp 43.81
+determined mass: 3674.05, dT=4.94, inputJoule=75900.38
+current temp:43.81, desired T: 55.00
+control joule needed:52659.56, timeOn: 59840.41
+heater off, waiting
+waiting done: current temp 48.06
+determined mass: 2961.40, dT=4.25, inputJoule=52659.56
+current temp:48.06, desired T: 55.00
+control joule needed:32654.81, timeOn: 37107.74
+heater off, waiting
+waiting done: current temp 51.19
+determined mass: 2497.50, dT=3.12, inputJoule=32654.81
+current temp:51.19, desired T: 55.00
+control joule needed:17945.44, timeOn: 20392.54
+heater off, waiting
+waiting done: current temp 52.75
+determined mass: 2745.00, dT=1.56, inputJoule=17945.44
+current temp:52.75, desired T: 55.00
+control joule needed:10590.75, timeOn: 12034.94
+heater off, waiting
+waiting done: current temp 54.25
+determined mass: 1687.50, dT=1.50, inputJoule=10590.75
+current temp:54.25, desired T: 55.00
+control joule needed:3530.25, timeOn: 4011.65
+heater off, waiting
+waiting done: current temp 54.75
+current temp:54.75, desired T: 55.00
+control joule needed:1176.75, timeOn: 1337.22
+heater off, waiting
+waiting done: current temp 54.69
+current temp:54.69, desired T: 55.00
+control joule needed:1470.94, timeOn: 1671.52
+heater off, waiting
+waiting done: current temp 54.69
+current temp:54.69, desired T: 55.00
+control joule needed:1470.94, timeOn: 1671.52
+heater off, waiting
+waiting done: current temp 54.63
+current temp:54.63, desired T: 55.00
+control joule needed:1765.13, timeOn: 2005.82
+heater off, waiting
+waiting done: current temp 54.56
+current temp:54.56, desired T: 55.00
+control joule needed:2059.31, timeOn: 2340.13
+heater off, waiting
+waiting done: current temp 54.56
+current temp:54.56, desired T: 55.00
+control joule needed:2059.31, timeOn: 2340.13
+TOOT20
+String to parse:20
+Set toT!20.00
+o
+Both off!
+TOOT50
+String to parse:50
+Set toT!50.00
+c
+Mode switch!
+Auto temp
+current temp:19.00, desired T: 50.00
+control joule needed:145917.00, timeOn: 165814.77
+heater off, waiting
+waiting done: current temp 35.50
+determined mass: 2113.64, dT=16.50, inputJoule=145917.00
+current temp:35.50, desired T: 50.00
+control joule needed:68251.50, timeOn: 77558.52
+heater off, waiting
+Client connected...
+WebSocket rocks
+String to parse:ocket rocks
+?
+toT:50.00
+fromT:40.81
+mass:1500.00
+Watt:880.00
+maxOn:0.75
+offTime:60000
+waiting done: current temp 41.00
+determined mass: 2965.91, dT=5.50, inputJoule=68251.50
+current temp:41.00, desired T: 50.00
+control joule needed:42363.00, timeOn: 48139.77
+heater off, waiting
+waiting done: current temp 47.69
+determined mass: 1514.02, dT=6.69, inputJoule=42363.00
+current temp:47.69, desired T: 50.00
+control joule needed:10884.94, timeOn: 12369.25
+heater off, waiting
+waiting done: current temp 50.38
+determined mass: 968.02, dT=2.69, inputJoule=10884.94
+waiting:c current temp 50.38
+waiting done: current temp 50.38
+waiting:c current temp 50.38
+waiting done: current temp 50.63
+waiting:c current temp 50.63
+waiting done: current temp 50.81
+waiting:c current temp 50.81
+waiting done: current temp 50.81
+waiting:c current temp 50.81
+waiting done: current temp 50.75
+waiting:c current temp 50.75
+waiting done: current temp 51.00
+waiting:c current temp 51.00
+waiting done: current temp 50.75
+waiting:c current temp 50.75
+waiting done: current temp 50.63
+waiting:c current temp 50.63
+waiting done: current temp 50.38
+waiting:c current temp 50.38
+waiting done: current temp 50.63
+waiting:c current temp 50.63
+TOOT27
+String to parse:27
+Set toT!27.00
+waiting done: current temp 50.94
+waiting:c current temp 50.94
+waiting done: current temp 50.88
+waiting:c current temp 50.88
+waiting done: current temp 50.81
+waiting:c current temp 50.81
+Client connected...
+WebSocket rocks
+String to parse:ocket rocks
+waiting done: current temp 50.63
+waiting:c current temp 50.63
+waiting done: current temp 50.56
+waiting:c current temp 50.56
+waiting done: current temp 50.38
+waiting:c current temp 50.38
+waiting done: current temp 50.38
+waiting:c current temp 50.38
+waiting done: current temp 50.19
+waiting:c current temp 50.19
+waiting done: current temp 49.50
+waiting:c current temp 49.50
+waiting done: current temp 47.75
+waiting:c current temp 47.75
+waiting done: current temp 46.94
+waiting:c current temp 46.94
+waiting done: current temp 45.94
+waiting:c current temp 45.94
+waiting done: current temp 45.69
+waiting:c current temp 45.69
+waiting done: current temp 45.56
+waiting:c current temp 45.56
+waiting done: current temp 44.75
+waiting:c current temp 44.75
+waiting done: current temp 41.44
+waiting:c current temp 41.44
+waiting done: current temp 40.31
+waiting:c current temp 40.31
+waiting done: current temp 40.12
+waiting:c current temp 40.12
+waiting done: current temp 40.31
+waiting:c current temp 40.31
+waiting done: current temp 40.63
+waiting:c current temp 40.63
+waiting done: current temp 40.81
+waiting:c current temp 40.81
+waiting done: current temp 40.81
+waiting:c current temp 40.81
+waiting done: current temp 40.88
+waiting:c current temp 40.88
+waiting done: current temp 40.75
+waiting:c current temp 40.75
+waiting done: current temp 40.44
+waiting:c current temp 40.38
+waiting done: current temp 40.25
+waiting:c current temp 40.25
+waiting done: current temp 40.19
+waiting:c current temp 40.19
+waiting done: current temp 40.12
+waiting:c current temp 40.12
+waiting done: current temp 39.94
+waiting:c current temp 39.94
+waiting done: current temp 37.69
+waiting:c current temp 37.69
+waiting done: current temp 36.38
+waiting:c current temp 36.38
+waiting done: current temp 36.25
+waiting:c current temp 36.25
+waiting done: current temp 36.00
+waiting:c current temp 36.00
+waiting done: current temp 34.81
+waiting:c current temp 34.81
+waiting done: current temp 34.00
+waiting:c current temp 34.00
+waiting done: current temp 34.06
+waiting:c current temp 34.06
+waiting done: current temp 33.19
+waiting:c current temp 33.19
+waiting done: current temp 32.50
+waiting:c current temp 32.50
+waiting done: current temp 31.75
+waiting:c current temp 31.75
+MASS3000
+String to parse:3000
+Set mass!3000.00
+waiting done: current temp 31.62
+waiting:c current temp 31.62
+waiting done: current temp 31.56
+waiting:c current temp 31.56
+waiting done: current temp 31.50
+waiting:c current temp 31.50
+waiting done: current temp 31.44
+waiting:c current temp 31.44
+waiting done: current temp 30.94
+waiting:c current temp 30.94
+waiting done: current temp 30.50
+waiting:c current temp 30.50
+waiting done: current temp 30.31
+waiting:c current temp 30.31
+waiting done: current temp 30.12
+waiting:c current temp 30.12
+waiting done: current temp 29.94
+waiting:c current temp 29.94
+waiting done: current temp 29.75
+waiting:c current temp 29.75
+waiting done: current temp 29.69
+waiting:c current temp 29.69
+waiting done: current temp 29.50
+waiting:c current temp 29.50
+waiting done: current temp 28.87
+waiting:c current temp 28.87
+waiting done: current temp 28.44
+waiting:c current temp 28.44
+waiting done: current temp 28.19
+waiting:c current temp 28.19
+waiting done: current temp 28.12
+waiting:c current temp 28.12
+waiting done: current temp 28.06
+waiting:c current temp 28.06
+waiting done: current temp 27.94
+waiting:c current temp 27.94
+?
+toT:27.00
+fromT:27.87
+mass:3000.00
+Watt:880.00
+maxOn:0.75
+offTime:60000
+waiting done: current temp 27.81
+waiting:c current temp 27.81
+waiting done: current temp 27.75
+waiting:c current temp 27.75
+waiting done: current temp 27.75
+waiting:c current temp 27.75
+waiting done: current temp 27.94
+waiting:c current temp 27.94
+waiting done: current temp 28.06
+waiting:c current temp 28.06
+waiting done: current temp 28.12
+waiting:c current temp 28.12
+waiting done: current temp 28.12
+waiting:c current temp 28.12
+waiting done: current temp 28.12
+waiting:c current temp 28.12
+waiting done: current temp 28.12
+waiting:c current temp 28.12
+waiting done: current temp 28.12
+waiting:c current temp 28.12
+waiting done: current temp 28.12
+waiting:c current temp 28.12
+waiting done: current temp 28.12
+waiting:c current temp 28.12
+waiting done: current temp 28.06
+waiting:c current temp 28.06
+waiting done: current temp 28.12
+waiting:c current temp 28.12
+TOOT32
+String to parse:32
+Set toT!32.00
+waiting done: current temp 28.12
+current temp:28.12, desired T: 32.00
+control joule needed:36479.25, timeOn: 41453.69
+heater off, waiting
+waiting done: current temp 30.50
+determined mass: 3671.05, dT=2.37, inputJoule=36479.25
+current temp:30.50, desired T: 32.00
+control joule needed:14121.00, timeOn: 16046.59
+heater off, waiting
+waiting done: current temp 31.25
+determined mass: 4500.00, dT=0.75, inputJoule=14121.00
+current temp:31.25, desired T: 32.00
+control joule needed:7060.50, timeOn: 8023.30
+heater off, waiting
+waiting done: current temp 31.94
+current temp:31.94, desired T: 32.00
+control joule needed:588.37, timeOn: 668.61
+heater off, waiting
+waiting done: current temp 32.19
+waiting:c current temp 32.19
+waiting done: current temp 32.19
+waiting:c current temp 32.19
+waiting done: current temp 32.19
+waiting:c current temp 32.19
+waiting done: current temp 32.19
+waiting:c current temp 32.19
+waiting done: current temp 32.19
+waiting:c current temp 32.19
+waiting done: current temp 32.25
+waiting:c current temp 32.25
+waiting done: current temp 32.25
+waiting:c current temp 32.25
+waiting done: current temp 32.25
+waiting:c current temp 32.19
+waiting done: current temp 32.13
+waiting:c current temp 32.13
+waiting done: current temp 32.06
+waiting:c current temp 32.06
+waiting done: current temp 32.06
+waiting:c current temp 32.06
+waiting done: current temp 32.00
+waiting:c current temp 32.00
+waiting done: current temp 32.00
+waiting:c current temp 32.00
+waiting done: current temp 32.00
+waiting:c current temp 32.00
+waiting done: current temp 31.94
+current temp:31.94, desired T: 32.00
+control joule needed:588.37, timeOn: 668.61
+heater off, waiting
+c
+Mode switch!
+Off
+o
+Both off!
+TOOT20
+String to parse:20
+Set toT!20.00
+MASS100
+String to parse:100
+Set mass!100.00
+TOOT25
+String to parse:25
+Set toT!25.00
+c
+Mode switch!
+Auto temp
+current temp:21.06, desired T: 25.00
+control joule needed:1235.59, timeOn: 1404.08
+heater off, waiting
+waiting done: current temp 21.87
+current temp:21.87, desired T: 25.00
+control joule needed:980.63, timeOn: 1114.35
+heater off, waiting
+waiting done: current temp 22.81
+current temp:22.81, desired T: 25.00
+control joule needed:686.44, timeOn: 780.04
+heater off, waiting
+Client connected...
+WebSocket rocks
+String to parse:ocket rocks
+?
+toT:25.00
+fromT:23.50
+mass:100.00
+Watt:880.00
+maxOn:0.75
+offTime:60000
+waiting done: current temp 23.75
+current temp:23.75, desired T: 25.00
+control joule needed:392.25, timeOn: 445.74
+heater off, waiting
+waiting done: current temp 24.50
+current temp:24.50, desired T: 25.00
+control joule needed:156.90, timeOn: 178.30
+heater off, waiting
+waiting done: current temp 25.12
+waiting:c current temp 25.12
+waiting done: current temp 25.19
+waiting:c current temp 25.19
+waiting done: current temp 25.25
+waiting:c current temp 25.25
+waiting done: current temp 25.31
+waiting:c current temp 25.31
+waiting done: current temp 25.37
+waiting:c current temp 25.37
+waiting done: current temp 25.50
+waiting:c current temp 25.50
+waiting done: current temp 25.56
+waiting:c current temp 25.56
+waiting done: current temp 25.56
+waiting:c current temp 25.56
+waiting done: current temp 25.62
+waiting:c current temp 25.62
+waiting done: current temp 25.69
+waiting:c current temp 25.69
+waiting done: current temp 25.75
+waiting:c current temp 25.75
+waiting done: current temp 25.81
+waiting:c current temp 25.81
+waiting done: current temp 25.81
+waiting:c current temp 25.81
+waiting done: current temp 25.88
+waiting:c current temp 25.88
+waiting done: current temp 25.94
+waiting:c current temp 25.94
+waiting done: current temp 25.94
+waiting:c current temp 25.94
+waiting done: current temp 26.00
+waiting:c current temp 26.00
+waiting done: current temp 26.00
+waiting:c current temp 26.00
+waiting done: current temp 26.00
+waiting:c current temp 26.00
+waiting done: current temp 26.06
+waiting:c current temp 26.06
+waiting done: current temp 26.06
+waiting:c current temp 26.06
+waiting done: current temp 26.06
+waiting:c current temp 26.06
+waiting done: current temp 26.12
+waiting:c current temp 26.12
+waiting done: current temp 26.12
+waiting:c current temp 26.12
+waiting done: current temp 26.12
+waiting:c current temp 26.12
+waiting done: current temp 26.12
+waiting:c current temp 26.12
+waiting done: current temp 26.12
+waiting:c current temp 26.12
+waiting done: current temp 26.12
+waiting:c current temp 26.12
+waiting done: current temp 26.12
+waiting:c current temp 26.12
+waiting done: current temp 26.19
+waiting:c current temp 26.19
+waiting done: current temp 26.19
+waiting:c current temp 26.19
+waiting done: current temp 26.19
+waiting:c current temp 26.19
+waiting done: current temp 26.19
+waiting:c current temp 26.19
+waiting done: current temp 26.19
+waiting:c current temp 26.19
+waiting done: current temp 26.19
+waiting:c current temp 26.19
+waiting done: current temp 26.19
+waiting:c current temp 26.19
+waiting done: current temp 26.19
+waiting:c current temp 26.19
+waiting done: current temp 26.12
+waiting:c current temp 26.12
+waiting done: current temp 26.12
+waiting:c current temp 26.12
+waiting done: current temp 26.12
+waiting:c current temp 26.12
+waiting done: current temp 26.12
+waiting:c current temp 26.12
+waiting done: current temp 26.12
+waiting:c current temp 26.12
+waiting done: current temp 26.12
+waiting:c current temp 26.12
+waiting done: current temp 26.12
+waiting:c current temp 26.12
+waiting done: current temp 26.12
+waiting:c current temp 26.12
+waiting done: current temp 26.06
+waiting:c current temp 26.06
+waiting done: current temp 26.06
+waiting:c current temp 26.06
+waiting done: current temp 26.06
+waiting:c current temp 26.06
+waiting done: current temp 26.06
+waiting:c current temp 26.06
+waiting done: current temp 26.06
+waiting:c current temp 26.06
+waiting done: current temp 26.00
+waiting:c current temp 26.00
+waiting done: current temp 26.00
+waiting:c current temp 26.00
+waiting done: current temp 26.00
+waiting:c current temp 26.00
+waiting done: current temp 26.00
+waiting:c current temp 26.00
+waiting done: current temp 25.94
+waiting:c current temp 25.94
+waiting done: current temp 25.94
+waiting:c current temp 25.94
+waiting done: current temp 25.94
+waiting:c current temp 25.94
+waiting done: current temp 25.94
+waiting:c current temp 25.94
+waiting done: current temp 25.88
+waiting:c current temp 25.88
+waiting done: current temp 25.88
+waiting:c current temp 25.88
+waiting done: current temp 25.88
+waiting:c current temp 25.88
+waiting done: current temp 25.88
+waiting:c current temp 25.88
+waiting done: current temp 25.81
+waiting:c current temp 25.81
+waiting done: current temp 25.81
+waiting:c current temp 25.81
+waiting done: current temp 25.81
+waiting:c current temp 25.81
+waiting done: current temp 25.81
+waiting:c current temp 25.81
+waiting done: current temp 25.75
+waiting:c current temp 25.75
+waiting done: current temp 25.75
+waiting:c current temp 25.75
+waiting done: current temp 25.75
+waiting:c current temp 25.75
+waiting done: current temp 25.69
+waiting:c current temp 25.69
+waiting done: current temp 25.69
+waiting:c current temp 25.69
+waiting done: current temp 25.69
+waiting:c current temp 25.69
+waiting done: current temp 25.62
+waiting:c current temp 25.62
+waiting done: current temp 25.62
+waiting:c current temp 25.62
+waiting done: current temp 25.62
+waiting:c current temp 25.62
+waiting done: current temp 25.62
+waiting:c current temp 25.62
+waiting done: current temp 25.56
+waiting:c current temp 25.56
+waiting done: current temp 25.56
+waiting:c current temp 25.56
+waiting done: current temp 25.56
+waiting:c current temp 25.56
+waiting done: current temp 25.56
+waiting:c current temp 25.56
+waiting done: current temp 25.50
+waiting:c current temp 25.50
+waiting done: current temp 25.50
+waiting:c current temp 25.50
+waiting done: current temp 25.44
+waiting:c current temp 25.44
+waiting done: current temp 25.44
+waiting:c current temp 25.44
+waiting done: current temp 25.44
+waiting:c current temp 25.44
+waiting done: current temp 25.44
+waiting:c current temp 25.44
+waiting done: current temp 25.37
+waiting:c current temp 25.37
+waiting done: current temp 25.37
+waiting:c current temp 25.37
+waiting done: current temp 25.37
+waiting:c current temp 25.37
+waiting done: current temp 25.31
+waiting:c current temp 25.31
+waiting done: current temp 25.31
+waiting:c current temp 25.31
+waiting done: current temp 25.31
+waiting:c current temp 25.31
+waiting done: current temp 25.25
+waiting:c current temp 25.25
+waiting done: current temp 25.25
+waiting:c current temp 25.25
+waiting done: current temp 25.25
+waiting:c current temp 25.25
+waiting done: current temp 25.19
+waiting:c current temp 25.19
+waiting done: current temp 25.19
+waiting:c current temp 25.19
+waiting done: current temp 25.19
+waiting:c current temp 25.19
+waiting done: current temp 25.12
+waiting:c current temp 25.12
+waiting done: current temp 25.12
+waiting:c current temp 25.12
+waiting done: current temp 25.12
+waiting:c current temp 25.12
+waiting done: current temp 25.12
+waiting:c current temp 25.12
+waiting done: current temp 25.06
+waiting:c current temp 25.06
+waiting done: current temp 25.06
+waiting:c current temp 25.06
+waiting done: current temp 25.06
+waiting:c current temp 25.06
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 25.00
+waiting:c current temp 25.00
+waiting done: current temp 24.94
+current temp:24.94, desired T: 25.00
+control joule needed:19.61, timeOn: 22.29
+heater off, waiting
+waiting done: current temp 24.87
+current temp:24.87, desired T: 25.00
+control joule needed:39.22, timeOn: 44.57
+heater off, waiting
+waiting done: current temp 24.75
+current temp:24.75, desired T: 25.00
+control joule needed:78.45, timeOn: 89.15
+heater off, waiting
+TOOT10
+String to parse:10
+Set toT!10.00
+c
+Mode switch!
+Off
+o
+Both off!

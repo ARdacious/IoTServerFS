@@ -26,6 +26,14 @@
 // Define the array of leds
 CRGB leds[NUM_LEDS];
 
+
+// Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
+OneWire oneWire(ONE_WIRE_BUS);
+// Pass our oneWire reference to Dallas Temperature. 
+DallasTemperature sensors(&oneWire);
+
+//DeviceAddress ambientAddr = {40, 97, 100, 18, 46, 126, 6, 12};
+
 void setupLeds() {                
   // initialize the digital pin as an output.
   pinMode(DATA_PIN, FUNCTION_3);
@@ -51,6 +59,7 @@ int errorCount = 0;
 
 int mode = 0;
 unsigned long ts;
+unsigned long ts_blink;
 unsigned long t=0;
 
 char pendingCmd = 0;
@@ -65,9 +74,15 @@ struct SousVideConfig {
   unsigned long tsOn = 0;
   float maxOn = 0.75;
   unsigned long offTime = 60 * 1000;
-  float startT = 0;
-  float inputJoule = 0;
-  float onTime = 0;
+  struct detectMassStruct {
+    // mass detection
+    float startT = 0;
+    float inputJoule = 0;
+    float onTime = 0;
+    float mindT = 3;
+    float minOnTime = 10000;
+    bool autoUpdateMass = false;
+  } detectMass;
 };
 
 struct SousVideConfig cfg;
@@ -80,9 +95,8 @@ void reportTemperatures();
 
 void mainHeater(bool on) {
   digitalWrite(MAIN_HEATER, on);
-  leds[0] = CRGB::Orange;
   if (on) leds[2] = CRGB::Red;
-  else leds[2] = CRGB::Green;
+  else leds[2] = CRGB::Black;
   FastLED.show();
 }
 float getTemp();
@@ -105,19 +119,22 @@ void controlTemperature() {
     if (millis() > cfg.tsOn) {
       cfg.tsOn = 0;
       webSocket.broadcastTXT("waiting done: current temp "+String(cfg.fromT));
-      if (cfg.startT > 0) {
+      if (cfg.detectMass.startT > 0) {
         // try to determine mass
         // joule = m * coef * dT
         // m = joule / (coef * dT)
-        float dT = getTemp() - cfg.startT;
-        if (cfg.onTime > 10000 || dT > 2) {
+        float dT = getTemp() - cfg.detectMass.startT;
+        if (cfg.detectMass.onTime > cfg.detectMass.minOnTime || dT > cfg.detectMass.mindT) {
           // only update mass if confidence
-          float mass = cfg.inputJoule / (dT * cfg.coef);
-          webSocket.broadcastTXT("determined mass: "+String(mass) + ", dT="+String(dT)+", inputJoule="+String(cfg.inputJoule));
-          cfg.mass = mass;
+          float mass = cfg.detectMass.inputJoule / (dT * cfg.coef);
+          webSocket.broadcastTXT("determined mass: "+String(mass) + ", dT="+String(dT)+", inputJoule="+String(cfg.detectMass.inputJoule));
+          if (cfg.detectMass.autoUpdateMass) {
+            cfg.mass = mass;
+            webSocket.broadcastTXT("mass updated to: "+String(mass));
+          }
         }
-        cfg.inputJoule = 0;
-        cfg.startT = 0;
+        cfg.detectMass.inputJoule = 0;
+        cfg.detectMass.startT = 0;
       }
     }
   }
@@ -127,9 +144,9 @@ void controlTemperature() {
     if (timeOn > 0) {
       cfg.tsOff = millis() + (int)timeOn;
       // store start temperature and input joule
-      cfg.inputJoule = joule;
-      cfg.startT = getTemp();
-      cfg.onTime = timeOn;
+      cfg.detectMass.inputJoule = joule;
+      cfg.detectMass.startT = getTemp();
+      cfg.detectMass.onTime = timeOn;
       // give some feedback
       webSocket.broadcastTXT("current temp:" + String(cfg.fromT) + ", desired T: "+ String(cfg.toT));
       webSocket.broadcastTXT("control joule needed:" + String(joule) + ", timeOn: "+ String(timeOn));
@@ -153,6 +170,8 @@ void handleCommand(char * command) {
       webSocket.broadcastTXT("Watt:" + String(cfg.watt));
       webSocket.broadcastTXT("maxOn:" + String(cfg.maxOn));
       webSocket.broadcastTXT("offTime:" + String(cfg.offTime));
+      webSocket.broadcastTXT("coef:" + String(cfg.coef));
+      webSocket.broadcastTXT("Mode:" + String(mode));
     }
     else if (ch == 'o') {
       mode = 0;
@@ -161,8 +180,6 @@ void handleCommand(char * command) {
       //mode = 0;
       digitalWrite(MAIN_HEATER, LOW);
       digitalWrite(WALL_HEATER, LOW);
-      leds[0] = CRGB::Orange;
-      leds[1] = CRGB::Black;
       leds[2] = CRGB::Black;
       FastLED.show();
 
@@ -185,8 +202,7 @@ void handleCommand(char * command) {
       //mode = 1;
       //ts = millis();
       digitalWrite(WALL_HEATER, HIGH);
-      leds[0] = CRGB::Orange;
-      leds[1] = CRGB::Red;
+      leds[2] = CRGB::Red;
       FastLED.show();
     }
     else if (ch == 'b') {
@@ -202,46 +218,100 @@ void handleCommand(char * command) {
       if (cmd.equals("WATT")) {
         // P? = transfered wattage
         cfg.watt = val.toFloat();
-        webSocket.broadcastTXT("Set watt!" + String(cfg.watt));
+        webSocket.broadcastTXT("Set watt: " + String(cfg.watt));
       }
       else if (cmd.equals("FRMT")) {
         // F = from Temperature
         cfg.fromT = val.toFloat();
-        webSocket.broadcastTXT("Set fromT!" + String(cfg.fromT));
+        webSocket.broadcastTXT("Set fromT: " + String(cfg.fromT));
       }
       else if (cmd.equals("TOOT")) {
         // T = desired Temperature
         cfg.toT = val.toFloat();
-        webSocket.broadcastTXT("Set toT!" + String(cfg.toT));
+        webSocket.broadcastTXT("Set toT: " + String(cfg.toT));
       }
       else if (cmd.equals("MASS")) {
         // M = mass
         cfg.mass = val.toFloat();
-        webSocket.broadcastTXT("Set mass!"+ String(cfg.mass));
+        webSocket.broadcastTXT("Set mass: "+ String(cfg.mass));
       }
       else if (cmd.equals("MXON")) {
-        // M = mass
         cfg.maxOn = val.toFloat();
-        webSocket.broadcastTXT("Set maxOn!"+ String(cfg.maxOn));
+        webSocket.broadcastTXT("Set maxOn: "+ String(cfg.maxOn));
       }
       else if (cmd.equals("OFFT")) {
-        // M = mass
         cfg.offTime = val.toInt();
-        webSocket.broadcastTXT("Set offTime!"+ String(cfg.offTime));
+        webSocket.broadcastTXT("Set offTime: "+ String(cfg.offTime));
+      }
+      else if (cmd.equals("COEF")) {
+        cfg.coef = val.toInt();
+        webSocket.broadcastTXT("Set coefficient: "+ String(cfg.coef));
+      }
+      else if (cmd.equals("MODE")) {
+        mode = val.toInt();
+        webSocket.broadcastTXT("Set mode: "+ String(mode));
       }
     }
 }
 
+bool status = false;
+unsigned long tstemp;
+
 void loop_Temperature() {
-  webSocket.loop();
-  if (mode == 1) {
-    controlTemperature();
+  unsigned long tsnow = millis();
+  t = tstemp + 1000;
+  if (t < tsnow) {
+    sensors.requestTemperatures();
+    tstemp = t;
   }
+  // report every 5 seconds
   t = ts + 5000;
-  if (t < millis()) {
+  if (t < tsnow) {
     reportTemperatures();
     //Serial.println(t);
     ts = t;
+  }
+  t = ts_blink + 1000;
+  if (t < tsnow) {
+    // blink some leds
+    if (webSocket.connectedClients() > 0) {
+      if (status) {
+        status = false;
+      }
+      else {
+        status = true;
+      }
+    }
+    else {
+      status = true;
+    }
+    if (status) {
+      if (mode == 0) {
+        leds[0] = CRGB::Blue;
+      }
+      else {
+        leds[0] = CRGB::Red;
+        if (cfg.toT - cfg.fromT > 1) {
+          leds[1] = CRGB::Orange;
+        }
+        else if (cfg.fromT > cfg.toT) {
+          leds[1] = CRGB::Red;
+        }
+        else {
+          leds[1] = CRGB::Green;
+        }
+      }
+    }
+    else {
+      leds[0] = CRGB::Black;
+      leds[1] = CRGB::Black;
+    }
+    FastLED.show();
+    ts_blink = t;
+  }
+  webSocket.loop();
+  if (mode == 1) {
+    controlTemperature();
   }
 }
 
@@ -278,12 +348,6 @@ void setup_Temperature() {
 }
 
 
-// Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
-OneWire oneWire(ONE_WIRE_BUS);
-// Pass our oneWire reference to Dallas Temperature. 
-DallasTemperature sensors(&oneWire);
-
-//DeviceAddress ambientAddr = {40, 97, 100, 18, 46, 126, 6, 12};
 
 void setupTempSensors()
 {
@@ -314,7 +378,7 @@ void reportAllJSON() {
   float temp;
   String json = "{";
   json += "\"count\":" + String(c);
-  sensors.requestTemperatures();
+  //sensors.requestTemperatures();
   for (i = 0; i < c; i++) {
     temp = sensors.getTempCByIndex(i);
     json += "\"temp" + String(i) + "\":" + String(temp) + ",";
@@ -340,7 +404,7 @@ void reportTemperatures() {
   int c = sensors.getDeviceCount();
   int i;
   float temp;
-  sensors.requestTemperatures();
+  //sensors.requestTemperatures();
   for (i = 0; i < c; i++) {
     temp = sensors.getTempCByIndex(i);
     if (output != "[") {
@@ -369,7 +433,7 @@ void handleTempList() {
   int c = sensors.getDeviceCount();
   int i;
   float temp;
-  sensors.requestTemperatures();
+  //sensors.requestTemperatures();
   for (i = 0; i < c; i++) {
     temp = sensors.getTempCByIndex(i);
     if (output != "[") {
