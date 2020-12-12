@@ -1,20 +1,183 @@
-<!DOCTYPE html>
-<head>
+<html>
+  <head>
+    <title>SousVide - ESP</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-left {
-  float: left;
-}
-right {
-  float: right;
-}
-</style>
 </head>
-  <meta charset="utf-8" />
-  <title>Sous Vide Web</title>
-<a href="powerlog.htm">Power Logger</a><br/>
-<a href="templog.htm">Temperature Logger</a><br/>
+  <body onkeypress="javascript:sendkey(event);">
+    <div>
+      <canvas id="myChart"  width="400px" height="400px"></canvas>
+    </div>
+    <form class="form-inline" action="" onsubmit="return false;" style="position: float;left:50px;">
+        <label for="mass">Approximate mass:</label>
+        <select id="mass" name="mass" onchange=" websocket.send('MASS'+event.target.value);">
+            <option value="1500.00">1.5 l/kg</option>
+            <option value="2000.00">2.0 l/kg</option>
+            <option value="2500.00">2.5 l/kg</option>
+            <option value="3000.00">3.0 l/kg</option>
+            <option value="140.00">Air</option>
+            <option value="300.00">300 g</option>
+            <option value="500.00">500 g</option>
+            <option value="800.00">800 g</option>
+          </select>        
+          <label for="fluid">Fluid:</label>
+          <select id="fluid" name="fluid" onchange=" websocket.send('COEF'+event.target.value);">
+            <option value="4.168">Water</option>
+            <option value="2.00">Oil</option>
+            <option value="1.005">Air</option>
+          </select>        
+        <label for="tempvalue">Temperature:</label>
+        <input type="number" id="tempvalue" name="settemp" value="50" step="0.1">Celcius</input>
+        <button class="button button4" id="setTemp" onclick="websocket.send('TOOT'+document.getElementById('tempvalue').value);">Set Temp</button>
+        <button class="button button4" id="loadSettings" onclick="websocket.send('?');">Load</button>
+        <button class="button button4" id="connectButton" onclick="connectWebSocket();">Connect</button>
+        <button class="button button4" id="disconnectButton" onclick="websocket.close();" >Disconnect</button>
+      </form>    <div id="status">
+      status
+    </div>
+    <div id="output">
+      output
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
 
-<iframe src="templog.htm" width="800px" height="500px"></iframe><br/>
-<iframe src="all"></iframe>
-<iframe src="temp"></iframe>
+
+<script>
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Temperature'
+      },
+      responsive:true,
+      maintainAspectRatio: false
+    }
+  });
+
+  var wsUri = 'ws://' + location.hostname + ':81/';
+  //var wsUri = 'ws://esp-2a7db6:81/';
+  var output;
+  var stat;
+
+  function init()
+  {
+    output = document.getElementById("output");
+    output.hidden=false;
+    stat = document.getElementById("status");
+    connectWebSocket();
+  }
+
+  function connectWebSocket()
+  {
+    websocket = new WebSocket(wsUri, ['arduino']);
+    websocket.onopen = function(evt) { onOpen(evt) };
+    websocket.onclose = function(evt) { onClose(evt) };
+    websocket.onmessage = function(evt) { onMessage(evt) };
+    websocket.onerror = function(evt) { onError(evt) };
+  }
+
+  function onOpen(evt)
+  {
+    writeToScreen("CONNECTED");
+    doSend("WebSocket rocks");
+    //document.getElementById("gages").style.display = "";
+  }
+
+  function onClose(evt)
+  {
+    writeToScreen("DISCONNECTED");
+    //document.getElementById("gages").style.display = "none";
+  }
+
+  function onMessage(evt)
+  {
+    try {
+      var colors = ["#3e95cd", "#ff0000", "#00ff00", "#0000ff"];
+  		var data = JSON.parse(evt.data);
+  		if (Array.isArray(data)) {
+    		for (var i = 0; i < data.length; i++) { 
+    		  if (myChart.data.datasets.length <= i) {
+    		    myChart.data.datasets.push({
+    		      label:data[i].name,
+    		      data:[],
+              borderColor: colors[i],
+              fill: false
+    		    });
+    		  }
+          var id = myChart.data.datasets[i].data.push(data[i].temp);
+        }
+        myChart.data.labels.push(myChart.data.labels.length);
+        myChart.update();
+  		}
+  	}
+  	catch (err) {
+        writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
+        stat.textContent = evt.data;
+        // try to parse info
+        var parts = evt.data.split(':')
+        if (parts.length == 2) {
+            console.log("parsed parts", parts[0], parts[1]);
+            if (parts[0] == "mass") {
+                document.getElementById('mass').value = parts[1];
+            }
+            if (parts[0] == "toT") {
+                document.getElementById('tempvalue').value = parts[1];
+            }
+        }
+/*
+RESPONSE: offTime:60000
+RESPONSE: maxOn:0.75
+RESPONSE: Watt:880.00
+RESPONSE: mass:3000.00
+RESPONSE: fromT:56.69
+RESPONSE: toT:57.00
+RESPONSE: ?
+*/
+          
+  	}
+  }
+
+  function onError(evt)
+  {
+    writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+    //document.getElementById("gages").style.display = "none";
+  }
+  
+  function doSend(message)
+  {
+    writeToScreen("SENT: " + message);
+    websocket.send(message);
+  }
+  function sendkey(event) {
+    doSend(event.key);
+  }
+  
+
+  function dumpvals()
+  {
+  	writeToScreen(e.which);
+  	var keys = Object.keys(e);
+  	writeToScreen(keys);
+  	for (let value of Object.keys(e)) {
+  		if (typeof e[value] !== 'undefined') {
+  			writeToScreen(value + " : jules : " + e[value]);
+  		}
+  	}
+  }
+  
+  function writeToScreen(message)
+  {
+  	var pre = document.createElement("p");
+  	pre.style.wordWrap = "break-word";
+  	pre.innerHTML = message;
+  	output.insertBefore(pre, output.childNodes[0])
+  }
+
+  window.addEventListener("load", init, false);
+</script>
+</body>
+</html>
